@@ -39,16 +39,16 @@
         
         .about-intro {
             display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: var(--spacing-3xl);
-            align-items: start;
-            margin-bottom: var(--spacing-4xl);
-            padding: var(--spacing-3xl);
+            grid-template-columns: 1fr 350px; /* Nội dung trái rộng hơn, Avatar phải 350px */
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 5rem;
+            padding: 3rem;
             background: var(--color-white);
             border: 1px solid var(--color-gray-200);
             border-radius: var(--radius-xl);
         }
-        
+
         body.dark-mode .about-intro {
             background: var(--color-gray-900);
             border-color: var(--color-gray-800);
@@ -62,17 +62,71 @@
         }
         
         .about-avatar {
-            width: 200px;
-            height: 200px;
+            width: 320px;
+            height: 320px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar-wrapper {
+            width: 100%;
+            height: 100%;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            overflow: hidden;
             background: linear-gradient(135deg, var(--color-green-primary), var(--color-green-secondary));
-            border-radius: var(--radius-xl);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
+            animation: morph 8s ease-in-out infinite, float 4s ease-in-out infinite;
+            border: 6px solid var(--color-white);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
-            color: var(--color-white);
-            font-weight: 700;
-            box-shadow: var(--shadow-xl);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .avatar-wrapper {
+            border-color: var(--color-gray-800);
+        }
+
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .avatar-wrapper:hover img {
+            transform: scale(1.1); /* Phóng lớn nhẹ khi hover */
+        }
+
+        /* Hiệu ứng biến hình (Morphing) */
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        /* Hiệu ứng bay bổng (Floating) */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .about-avatar::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110%;
+            height: 110%;
+            background: var(--color-green-primary);
+            filter: blur(40px);
+            opacity: 0.15;
+            z-index: -1;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.1); }
         }
         
         @media (max-width: 768px) {
@@ -80,8 +134,21 @@
                 margin: 0 auto;
             }
         }
-        
-        .about-bio h2 {
+        @media (max-width: 992px) {
+            .about-intro {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+                padding: 2rem;
+            }
+            .about-avatar {
+                margin: 0 auto;
+                order: -1; /* Đưa ảnh lên trước chữ trên điện thoại */
+                width: 280px;
+                height: 280px;
+            }
+        }
+                .about-bio h2 {
             font-size: var(--font-size-3xl);
             margin-bottom: var(--spacing-md);
         }
@@ -299,14 +366,14 @@
 <body>
     <header>
         <nav>
-            <a href="../index.html" class="logo">HXQ<span>.dev</span></a>
+            <a href="index.html" class="logo">HXQ<span>.dev</span></a>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
             <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="certificates.html">Certificates</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="../index.html" class="active">Trang chủ</a></li>
+                <li><a href="blog.html">Hành trình</a></li>
+                <li><a href="certificates.html">Chứng chỉ</a></li>
+                <li><a href="about.html">Về tôi</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
                 <li><button class="theme-toggle" aria-label="Toggle dark mode">🌙</button></li>
             </ul>
         </nav>
@@ -323,18 +390,23 @@
 
     <div class="about-content">
         <div class="about-intro">
-            <div class="about-avatar">HXQ</div>
             <div class="about-bio">
-                <h2>Xin chào! 👋</h2>
-                <p>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Xin chào! 👋</h2>
+                <p style="font-size: 1.15rem; margin-bottom: 1rem;">
                     Tôi là <strong>Huỳnh Xuân Quý</strong>, sinh viên năm 4 ngành Công nghệ Thông tin, định hướng trở thành một Full-Stack Developer với chuyên môn chính là Frontend.
                 </p>
-                <p>
-                    Tôi có hơn 2 năm kinh nghiệm thực hành thông qua các dự án cá nhân, dự án nhóm và môi trường thực tế. Tôi cũng đã tham gia nhiều vòng phỏng vấn và quen thuộc với quy trình tuyển dụng ngành IT.
+                <p style="font-size: 1.15rem; margin-bottom: 1rem;">
+                    Tôi có hơn 2 năm kinh nghiệm thực hành thông qua các dự án cá nhân, dự án nhóm và môi trường thực tế. Tôi tin rằng lập trình là sự kết hợp giữa logic và nghệ thuật trải nghiệm.
                 </p>
-                <p>
+                <p style="font-size: 1.15rem;">
                     Tôi tin rằng <strong>làm việc nhóm hiệu quả và chia sẻ kiến thức</strong> là nền tảng cốt lõi để tạo ra những sản phẩm chất lượng nhất.
                 </p>
+            </div>
+
+            <div class="about-avatar">
+                <div class="avatar-wrapper">
+                    <img src="../assets/images/avatar/avatar-quy.png" alt="Huỳnh Xuân Quý Profile">
+                </div>
             </div>
         </div>
 
@@ -363,46 +435,50 @@
             </p>
         </div>
 
-        <div class="about-section">
+       <div class="about-section">
             <h2>💪 Kỹ năng & Chuyên môn</h2>
             <div class="skills-list">
                 <div class="skill-category">
-                    <h4>Frontend (Chuyên môn chính)</h4>
+                    <h4>Frontend Development</h4>
                     <ul>
-                        <li>React & Next.js</li>
-                        <li>TypeScript</li>
-                        <li>Tailwind CSS</li>
-                        <li>Responsive Design</li>
-                        <li>Performance Optimization</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h4>Backend (Định hướng Full-Stack)</h4>
-                    <ul>
-                        <li>Node.js & Express</li>
-                        <li>RESTful APIs</li>
-                        <li>MongoDB & PostgreSQL</li>
-                        <li>System Architecture</li>
+                        <li>React.js & Next.js</li>
+                        <li>JavaScript (ES6+) & TypeScript</li>
+                        <li>HTML5, CSS3 (SCSS/Tailwind)</li>
+                        <li>Responsive & Adaptive Design</li>
+                        <li>State Management (Redux/Zustand)</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
                     <h4>Mobile Development</h4>
                     <ul>
+                        <li>Flutter & Dart</li>
                         <li>React Native</li>
-                        <li>Flutter (iOS & Android)</li>
-                        <li>Cross-platform Apps</li>
+                        <li>Material Design / Cupertino UI</li>
+                        <li>Integration with Firebase</li>
+                        <li>Mobile Performance Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Academic Foundation</h4>
+                    <ul>
+                        <li>C/C++, Java, C# (Nền tảng OOP)</li>
+                        <li>Cấu trúc dữ liệu & Giải thuật</li>
+                        <li>SQL Server, PostgreSQL, MongoDB</li>
+                        <li>RESTful API & Node.js</li>
+                        <li>Thiết kế hệ thống & Database Design</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
-                    <h4>Tools & Management</h4>
+                    <h4>Tools & Workflow</h4>
                     <ul>
-                        <li>Git & GitHub (Workflow)</li>
-                        <li>Docker & AWS</li>
-                        <li>CI/CD & Agile/Scrum</li>
-                        <li>Team Leadership</li>
+                        <li>Git & GitHub (Team Workflow)</li>
+                        <li>Agile / Scrum Methodologies</li>
+                        <li>Postman (API Testing)</li>
+                        <li>Figma (UI/UX Design Basic)</li>
+                        <li>Docker (Containerization basic)</li>
                     </ul>
                 </div>
             </div>

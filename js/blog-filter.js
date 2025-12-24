@@ -122,63 +122,93 @@ function loadDemoData() {
     allPosts = [
         {
             id: 1,
-            title: 'Xây dựng Blog với Next.js 14 và TypeScript',
-            excerpt: 'Hướng dẫn chi tiết cách tạo blog cá nhân hiện đại với Next.js App Router, MDX và Tailwind CSS từ đầu...',
-            category: 'Web',
-            date: '2025-12-15',
-            readTime: '8 min read',
-            image: '💻',
-            slug: 'xay-dung-blog-voi-nextjs-14'
+            title: 'Phát triển Đồ án chuyên ngành với Flutter & Supabase',
+            excerpt: 'Hành trình xây dựng ứng dụng di động đa nền tảng, từ việc thiết kế giao diện Material Design đến cách quản lý luồng dữ liệu thời gian thực và tối ưu hóa mã nguồn Dart...',
+            category: 'Project',
+            date: '2025-12-20',
+            readTime: '12 min read',
+            image: '🎓',
+            slug: 'phat-trien-do-an-chuyen-nganh-flutter-firebase'
         },
         {
             id: 2,
-            title: 'REST API Best Practices cho Developer',
-            excerpt: 'Những kinh nghiệm và pattern tôi học được khi xây dựng RESTful API production-ready cho dự án thực tế...',
-            category: 'Backend',
-            date: '2025-12-10',
-            readTime: '10 min read',
-            image: '🚀',
-            slug: 'rest-api-best-practices'
+            title: 'Giải quyết lỗi "Invalid constant value" trong Flutter',
+            excerpt: 'Tại sao không nên dùng static const cho màu có opacity? Cách dùng Getter function để ép giá trị tính toán tại runtime cực hiệu quả...',
+            category: 'Mobile',
+            date: '2025-12-15',
+            readTime: '7 min read',
+            image: '📱',
+            slug: 'flutter-invalid-constant-value-opacity-fix'
         },
         {
             id: 3,
-            title: 'React Native: Từ Zero đến Hero',
-            excerpt: 'Câu chuyện và bài học của tôi khi học React Native từ con số 0, những sai lầm cần tránh và tips hữu ích...',
-            category: 'Mobile',
+            title: 'Kinh nghiệm phỏng vấn thực tập sinh Frontend',
+            excerpt: 'Tổng hợp bộ câu hỏi về ES6+, React Hooks và cách mình thuyết phục nhà tuyển dụng thông qua tư duy giải quyết vấn đề...',
+            category: 'Web',
             date: '2025-12-05',
-            readTime: '12 min read',
-            image: '📱',
-            slug: 'react-native-tu-zero-den-hero'
+            readTime: '9 min read',
+            image: '💼',
+            slug: 'kinh-nghiem-phong-van-intern-frontend'
         },
         {
             id: 4,
-            title: 'Dự án E-commerce Full-stack với MERN',
-            excerpt: 'Xây dựng một website thương mại điện tử hoàn chỉnh sử dụng MongoDB, Express, React và Node.js...',
-            category: 'Project',
-            date: '2025-12-01',
-            readTime: '15 min read',
-            image: '🛒',
-            slug: 'du-an-ecommerce-fullstack-mern'
+            title: 'Tư duy hướng đối tượng (OOP) trong Java Spring Boot',
+            excerpt: 'Áp dụng các nguyên lý SOLID và Design Patterns vào dự án Backend để mã nguồn dễ bảo trì và mở rộng hơn cho đồ án chuyên ngành...',
+            category: 'Backend',
+            date: '2025-11-28',
+            readTime: '11 min read',
+            image: '⚙️',
+            slug: 'tu-duy-oop-java-spring-boot'
         },
         {
             id: 5,
-            title: 'TypeScript: Tại sao bạn nên học?',
-            excerpt: 'Lợi ích của TypeScript trong dự án thực tế và cách migrate từ JavaScript sang TypeScript hiệu quả...',
-            category: 'Web',
-            date: '2025-11-28',
-            readTime: '7 min read',
-            image: '📘',
-            slug: 'typescript-tai-sao-ban-nen-hoc'
+            title: 'Làm việc nhóm hiệu quả với quy trình Agile/Scrum',
+            excerpt: 'Cách mình và team điều phối dự án, phân chia task trên Trello và giải quyết xung đột khi cùng tham gia code một sản phẩm...',
+            category: 'Project',
+            date: '2025-11-15',
+            readTime: '8 min read',
+            image: '🤝',
+            slug: 'lam-viec-nhom-voi-agile-scrum'
         },
         {
             id: 6,
-            title: 'Microservices Architecture cho Beginners',
-            excerpt: 'Giới thiệu kiến trúc Microservices, khi nào nên dùng và những thách thức khi triển khai...',
+            title: 'Master Git: Quy trình Git Flow cho dự án sinh viên',
+            excerpt: 'Hướng dẫn sử dụng Branch, Pull Request và giải quyết Conflict khi làm việc nhóm để tránh mất mát mã nguồn...',
             category: 'Backend',
-            date: '2025-11-25',
-            readTime: '11 min read',
-            image: '⚡',
-            slug: 'microservices-architecture-cho-beginners'
+            date: '2025-10-30',
+            readTime: '6 min read',
+            image: '🌿',
+            slug: 'master-git-flow-du-an-sinh-vien'
+        },
+        {
+            id: 7,
+            title: 'Tối ưu UI/UX: Từ bản vẽ Figma đến mã nguồn React',
+            excerpt: 'Hành trình chuyển đổi từ bản thiết kế Design sang giao diện Responsive, Pixel-Perfect sử dụng Tailwind CSS và Framer Motion...',
+            category: 'Web',
+            date: '2025-10-12',
+            readTime: '10 min read',
+            image: '🎨',
+            slug: 'toi-uu-ui-ux-figma-to-react'
+        },
+        {
+            id: 8,
+            title: 'Thiết kế Database SQL Server cho hệ thống E-commerce',
+            excerpt: 'Cách chuẩn hóa cơ sở dữ liệu (3NF) và viết Store Procedure để xử lý các truy vấn bán hàng phức tạp trong bài tập lớn...',
+            category: 'Backend',
+            date: '2025-09-25',
+            readTime: '13 min read',
+            image: '💾',
+            slug: 'thiet-ke-database-sql-server-ecommerce'
+        },
+        {
+            id: 9,
+            title: 'Quản lý State trong Flutter: Tại sao mình chọn Bloc?',
+            excerpt: 'So sánh ưu nhược điểm của Provider và Bloc trong quá trình xây dựng ứng dụng Mobile đa nền tảng cho dự án cá nhân...',
+            category: 'Mobile',
+            date: '2025-09-05',
+            readTime: '15 min read',
+            image: '🚀',
+            slug: 'flutter-state-management-bloc-vs-provider'
         }
     ];
     
