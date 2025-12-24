@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chứng chỉ và thành tích của Huỳnh Xuân Quý">
+    <title>Certificates - Huỳnh Xuân Quý</title>
+    
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    
+    <style>
+        .certificates-hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-white) 100%);
+        }
+        
+        body.dark-mode .certificates-hero {
+            background: linear-gradient(135deg, var(--color-gray-900) 0%, var(--color-dark-bg) 100%);
+        }
+        
+        .certificates-hero h1 {
+            font-size: var(--font-size-5xl);
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--color-green-primary), var(--color-green-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-2xl);
+            padding: var(--spacing-3xl) var(--spacing-xl);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Certificate Card Style */
+        .certificate-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: var(--transition-base);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        body.dark-mode .certificate-card {
+            background: var(--color-gray-900);
+            border-color: var(--color-gray-800);
+        }
+
+        .cert-media-container {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        body.dark-mode .cert-media-container { background: #0f172a; }
+
+        .cert-badge-img {
+            width: 160px;
+            height: auto;
+            z-index: 2;
+            transition: transform 0.5s ease, opacity 0.4s ease;
+        }
+
+        .cert-real-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: scale(1.1);
+            background: #fff;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-green-primary);
+        }
+
+        .certificate-card:hover .cert-badge-img { opacity: 0; transform: scale(0.8); }
+        .certificate-card:hover .cert-real-img { opacity: 1; transform: scale(1); }
+
+        .cert-content {
+            padding: var(--spacing-xl);
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .certificate-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-gray-900);
+        }
+        
+        body.dark-mode .certificate-title { color: var(--color-white); }
+        
+        .certificate-issuer { color: var(--color-gray-600); font-size: var(--font-size-base); margin-bottom: var(--spacing-md); }
+        .certificate-date { color: var(--color-green-primary); font-size: var(--font-size-sm); font-weight: 600; margin-bottom: var(--spacing-md); }
+
+        .certificate-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: auto;
+        }
+        
+        .skill-badge {
+            padding: 0.25rem 0.75rem;
+            background: var(--color-gray-100);
+            color: var(--color-gray-800);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+        
+        body.dark-mode .skill-badge { background: var(--color-gray-800); color: var(--color-gray-300); }
+        
+        .certificate-cta {
+            margin-top: var(--spacing-xl);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: 2px solid var(--color-green-primary);
+            color: var(--color-green-primary);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-base);
+        }
+        
+        .certificate-cta:hover { background: var(--color-green-primary); color: var(--color-white); }
+
+        /* Timeline & Other Sections CSS */
+        .timeline-section { padding: var(--spacing-4xl) var(--spacing-xl); background: var(--color-gray-50); }
+        body.dark-mode .timeline-section { background: var(--color-gray-900); }
+        .timeline { max-width: 800px; margin: 0 auto; position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--color-green-primary); }
+        .timeline-item { position: relative; margin-bottom: var(--spacing-2xl); padding-left: var(--spacing-xl); }
+        .timeline-marker { position: absolute; left: -9px; top: 0; width: 20px; height: 20px; background: var(--color-green-primary); border-radius: var(--radius-full); border: 3px solid var(--color-white); }
+        body.dark-mode .timeline-marker { border-color: var(--color-dark-bg); }
+        .timeline-content { background: var(--color-white); padding: var(--spacing-xl); border-radius: var(--radius-lg); border: 1px solid var(--color-gray-200); }
+        body.dark-mode .timeline-content { background: var(--color-gray-800); border-color: var(--color-gray-700); }
+        .timeline-date { color: var(--color-green-primary); font-weight: 600; margin-bottom: var(--spacing-sm); }
+        
+        .stats-section { padding: var(--spacing-4xl) var(--spacing-xl); text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-2xl); max-width: 1000px; margin: 0 auto; }
+        .stat-number { font-size: var(--font-size-5xl); font-weight: 800; color: var(--color-green-primary); }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">HXQ<span>.dev</span></a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="certificates.html" class="active">Certificates</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button class="theme-toggle" aria-label="Toggle dark mode">🌙</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="certificates-hero">
+        <div class="container">
+            <h1>Certificates & Achievements</h1>
+            <p style="font-size: 1.25rem; color: var(--color-gray-600); max-width: 600px; margin: 0 auto;">
+                Chứng chỉ quốc tế từ Cisco Networking Academy trong hành trình phát triển bản thân
+            </p>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Cisco Certificates</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Learning Hours</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Core Skills</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="certificates-grid">
+        <article class="certificate-card">
+            <div class="cert-media-container">
+                <img src="../assets/images/certificates/networking-basics.png" alt="Networking Badge" class="cert-badge-img">
+                <img src="../assets/images/certificates/NetworkingBasics.png" alt="Networking Certificate" class="cert-real-img">
+            </div>
+            <div class="cert-content">
+                <h3 class="certificate-title">Networking Basics</h3>
+                <p class="certificate-issuer">🏢 Cisco Networking Academy</p>
+                <p class="certificate-date">📅 Nov 25, 2025</p>
+                <div class="certificate-skills">
+                    <span class="skill-badge">Networking</span>
+                    <span class="skill-badge">TCP/IP</span>
+                </div>
+                <a href="../assets/images/certificates/NetworkingBasics.png" target="_blank" class="certificate-cta">View Full Image 🔍</a>
+            </div>
+        </article>
+
+        <article class="certificate-card">
+            <div class="cert-media-container">
+                <img src="../assets/images/certificates/javascript-essentials-1.png" alt="JS 1 Badge" class="cert-badge-img">
+                <img src="../assets/images/certificates/JavaScriptEssentials1.png" alt="JS 1 Certificate" class="cert-real-img">
+            </div>
+            <div class="cert-content">
+                <h3 class="certificate-title">JavaScript Essentials 1</h3>
+                <p class="certificate-issuer">🏢 Cisco Networking Academy</p>
+                <p class="certificate-date">📅 Dec 2, 2025</p>
+                <div class="certificate-skills">
+                    <span class="skill-badge">ES6+</span>
+                    <span class="skill-badge">Logic</span>
+                </div>
+                <a href="../assets/images/certificates/JavaScriptEssentials1.png" target="_blank" class="certificate-cta">View Full Image 🔍</a>
+            </div>
+        </article>
+
+        <article class="certificate-card">
+            <div class="cert-media-container">
+                <img src="../assets/images/certificates/javascript-essentials-2.png" alt="JS 2 Badge" class="cert-badge-img">
+                <img src="../assets/images/certificates/JavaScriptEssentials2.png" alt="JS 2 Certificate" class="cert-real-img">
+            </div>
+            <div class="cert-content">
+                <h3 class="certificate-title">JavaScript Essentials 2</h3>
+                <p class="certificate-issuer">🏢 Cisco Networking Academy</p>
+                <p class="certificate-date">📅 Dec 2, 2025</p>
+                <div class="certificate-skills">
+                    <span class="skill-badge">Advanced JS</span>
+                    <span class="skill-badge">OOP</span>
+                </div>
+                <a href="../assets/images/certificates/JavaScriptEssentials2.png" target="_blank" class="certificate-cta">View Full Image 🔍</a>
+            </div>
+        </article>
+    </div>
+
+    <section class="timeline-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">Learning Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">December 2025</div>
+                        <h3>JavaScript Mastery</h3>
+                        <p>Hoàn thành chứng chỉ JavaScript Essentials 1 & 2 từ Cisco.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">November 2025</div>
+                        <h3>Networking Fundamentals</h3>
+                        <p>Học networking basics và hiểu sâu về cách internet hoạt động.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 5rem 2rem; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Interested in my skills?</h2>
+            <p style="font-size: 1.25rem; color: var(--color-gray-600); margin-bottom: 2rem;">
+                Xem portfolio của tôi để tìm hiểu thêm về các dự án thực tế.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="portfolio.html" class="btn btn-primary btn-lg">View Portfolio 💼</a>
+                <a href="contact.html" class="btn btn-secondary btn-lg">Get in Touch 📧</a>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>HXQ.dev</h3>
+                <p>Full-Stack Developer chuyên về Web & Mobile Development. Chia sẻ kiến thức và kinh nghiệm thực tế.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="certificates.html">Certificates</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="?filter=web">Web Development</a></li>
+                    <li><a href="?filter=backend">Backend</a></li>
+                    <li><a href="?filter=mobile">Mobile</a></li>
+                    <li><a href="?filter=project">Projects</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank" aria-label="GitHub">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Huỳnh Xuân Quý. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

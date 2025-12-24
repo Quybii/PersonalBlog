@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Liên hệ với Huỳnh Xuân Quý">
+    <title>Contact - Huỳnh Xuân Quý</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    
+    <style>
+        .contact-hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-white) 100%);
+        }
+        
+        body.dark-mode .contact-hero {
+            background: linear-gradient(135deg, var(--color-gray-900) 0%, var(--color-dark-bg) 100%);
+        }
+        
+        .contact-hero h1 {
+            font-size: var(--font-size-5xl);
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--color-green-primary), var(--color-green-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-4xl) var(--spacing-xl);
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: var(--spacing-4xl);
+        }
+        
+        @media (max-width: 968px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .contact-info {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-3xl);
+        }
+        
+        body.dark-mode .contact-info {
+            background: var(--color-gray-900);
+            border-color: var(--color-gray-800);
+        }
+        
+        .contact-info h2 {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: start;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+            padding: var(--spacing-lg);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            transition: var(--transition-base);
+        }
+        
+        body.dark-mode .contact-item {
+            background: var(--color-gray-800);
+        }
+        
+        .contact-item:hover {
+            transform: translateX(8px);
+            background: var(--color-green-primary);
+            color: var(--color-white);
+        }
+        
+        .contact-item:hover .contact-icon {
+            background: var(--color-white);
+            color: var(--color-green-primary);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--color-green-primary);
+            color: var(--color-white);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            transition: var(--transition-base);
+        }
+        
+        .contact-details h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .contact-details p {
+            color: var(--color-gray-600);
+            word-break: break-word;
+        }
+        
+        body.dark-mode .contact-details p {
+            color: var(--color-gray-400);
+        }
+        
+        .contact-item:hover .contact-details p {
+            color: var(--color-white);
+        }
+        
+        .social-links-section {
+            margin-top: var(--spacing-3xl);
+        }
+        
+        .social-links-section h3 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            transition: var(--transition-base);
+            color: var(--color-gray-900);
+        }
+        
+        body.dark-mode .social-link {
+            background: var(--color-gray-800);
+            color: var(--color-white);
+        }
+        
+        .social-link:hover {
+            background: var(--color-green-primary);
+            color: var(--color-white);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .contact-form {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-3xl);
+        }
+        
+        body.dark-mode .contact-form {
+            background: var(--color-gray-900);
+            border-color: var(--color-gray-800);
+        }
+        
+        .contact-form h2 {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-form-subtitle {
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        body.dark-mode .contact-form-subtitle {
+            color: var(--color-gray-400);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            display: none;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .success-message.show {
+            display: flex;
+        }
+        
+        .faq-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-4xl) var(--spacing-xl);
+        }
+        
+        .faq-section h2 {
+            text-align: center;
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--spacing-3xl);
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+        
+        .faq-item {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+        }
+        
+        body.dark-mode .faq-item {
+            background: var(--color-gray-900);
+            border-color: var(--color-gray-800);
+        }
+        
+        .faq-item h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-green-primary);
+        }
+        
+        .faq-item p {
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
+        
+        body.dark-mode .faq-item p {
+            color: var(--color-gray-400);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">HXQ<span>.dev</span></a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="certificates.html">Certificates</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><button class="theme-toggle" aria-label="Toggle dark mode">🌙</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Get In Touch</h1>
+            <p style="font-size: 1.25rem; color: var(--color-gray-600); max-width: 600px; margin: 0 auto;">
+                Hãy liên hệ với tôi để thảo luận về dự án, cơ hội hợp tác hoặc đơn giản là trao đổi về công nghệ
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <div class="contact-container">
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            
+            <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div class="contact-details">
+                    <h3>Email</h3>
+                    <p>contact@hxq.dev</p>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <div class="contact-details">
+                    <h3>Phone</h3>
+                    <p>+84 123 456 789</p>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-details">
+                    <h3>Location</h3>
+                    <p>Ho Chi Minh City, Vietnam</p>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">⏰</div>
+                <div class="contact-details">
+                    <h3>Working Hours</h3>
+                    <p>Mon - Fri: 9:00 AM - 6:00 PM (GMT+7)</p>
+                </div>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="social-links-section">
+                <h3>Connect With Me</h3>
+                <div class="social-grid">
+                    <a href="https://github.com" target="_blank" class="social-link">
+                        <span style="font-size: 1.5rem;">💻</span>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="social-link">
+                        <span style="font-size: 1.5rem;">💼</span>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-link">
+                        <span style="font-size: 1.5rem;">🐦</span>
+                        <span>Twitter</span>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="social-link">
+                        <span style="font-size: 1.5rem;">📘</span>
+                        <span>Facebook</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h2>Send Me a Message</h2>
+            <p class="contact-form-subtitle">
+                Điền thông tin bên dưới và tôi sẽ phản hồi trong vòng 24 giờ
+            </p>
+            
+            <div class="success-message" id="successMessage">
+                <span style="font-size: 1.5rem;">✓</span>
+                <span>Message sent successfully! I'll get back to you soon.</span>
+            </div>
+            
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name *</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            class="form-input" 
+                            placeholder="Nguyễn Văn A"
+                            required
+                        >
+                        <span class="form-error" data-error="name"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Your Email *</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            placeholder="your.email@example.com"
+                            required
+                        >
+                        <span class="form-error" data-error="email"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject" class="form-label">Subject *</label>
+                    <input 
+                        type="text" 
+                        id="subject" 
+                        name="subject" 
+                        class="form-input" 
+                        placeholder="Project inquiry / Collaboration / Question"
+                        required
+                    >
+                    <span class="form-error" data-error="subject"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" class="form-label">Message *</label>
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        class="form-textarea" 
+                        placeholder="Tell me about your project or question..."
+                        rows="6"
+                        required
+                    ></textarea>
+                    <span class="form-error" data-error="message"></span>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Send Message 📤
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h3>💼 Bạn nhận làm freelance không?</h3>
+                <p>Có, tôi sẵn sàng nhận các dự án freelance. Hãy liên hệ với tôi để thảo luận chi tiết về project của bạn.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>⏱️ Thời gian phản hồi là bao lâu?</h3>
+                <p>Tôi thường phản hồi trong vòng 24 giờ làm việc. Nếu urgent, hãy ghi rõ trong subject email.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>💰 Chi phí dự án được tính như thế nào?</h3>
+                <p>Chi phí phụ thuộc vào scope và complexity của project. Chúng ta sẽ thảo luận cụ thể sau khi tôi hiểu rõ yêu cầu.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>🎓 Bạn có nhận mentoring không?</h3>
+                <p>Có, tôi sẵn sàng hỗ trợ và chia sẻ kinh nghiệm cho những bạn mới bắt đầu. Hãy liên hệ để trao đổi thêm.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>🤝 Làm thế nào để collaborate?</h3>
+                <p>Tôi mở với nhiều hình thức hợp tác: freelance, part-time, hoặc collaboration trong dự án open source.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>📚 Bạn có viết technical articles không?</h3>
+                <p>Có, tôi thường xuyên chia sẻ kiến thức qua blog. Nếu bạn có topic muốn tôi viết, hãy suggest nhé!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>HXQ.dev</h3>
+                <p>Hành trình của một sinh viên năm 4 đam mê Flutter và Web Development.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Khám phá</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="pages/blog.html">Blog</a></li>
+                    <li><a href="pages/about.html">Thông tin</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Huỳnh Xuân Quý. Final Year Student Portfolio.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/navigation.js"></script>
+    
+    <script>
+        // Contact Form Handling
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Clear previous errors
+            window.appUtils.clearFormErrors();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Validate form
+            const validation = window.appUtils.validateForm(formData);
+            
+            if (!validation.isValid) {
+                window.appUtils.displayFormErrors(validation.errors);
+                return;
+            }
+            
+            // Simulate form submission
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending... ⏳';
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Show success message
+                document.getElementById('successMessage').classList.add('show');
+                
+                // Reset form
+                e.target.reset();
+                
+                // Reset button
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Send Message 📤';
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.remove('show');
+                }, 5000);
+                
+                window.appUtils.showNotification('Message sent successfully!', 'success');
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Câu chuyện và hành trình phát triển của Huỳnh Xuân Quý - Frontend Developer">
+    <title>About Me - Huỳnh Xuân Quý</title>
+    
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    
+    <style>
+        /* Logic CSS giữ nguyên hoàn toàn */
+        .about-hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-white) 100%);
+        }
+        
+        body.dark-mode .about-hero {
+            background: linear-gradient(135deg, var(--color-gray-900) 0%, var(--color-dark-bg) 100%);
+        }
+        
+        .about-hero h1 {
+            font-size: var(--font-size-5xl);
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--color-green-primary), var(--color-green-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--spacing-4xl) var(--spacing-xl);
+        }
+        
+        .about-intro {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: var(--spacing-3xl);
+            align-items: start;
+            margin-bottom: var(--spacing-4xl);
+            padding: var(--spacing-3xl);
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+        }
+        
+        body.dark-mode .about-intro {
+            background: var(--color-gray-900);
+            border-color: var(--color-gray-800);
+        }
+        
+        @media (max-width: 768px) {
+            .about-intro {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        
+        .about-avatar {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-green-primary), var(--color-green-secondary));
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--color-white);
+            font-weight: 700;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        @media (max-width: 768px) {
+            .about-avatar {
+                margin: 0 auto;
+            }
+        }
+        
+        .about-bio h2 {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .about-bio p {
+            font-size: var(--font-size-lg);
+            line-height: 1.8;
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        body.dark-mode .about-bio p {
+            color: var(--color-gray-400);
+        }
+        
+        .about-section {
+            margin-bottom: var(--spacing-4xl);
+            padding: var(--spacing-3xl);
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-xl);
+        }
+        
+        body.dark-mode .about-section {
+            background: var(--color-gray-900);
+            border-color: var(--color-gray-800);
+        }
+        
+        .about-section h2 {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--spacing-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .about-section h3 {
+            font-size: var(--font-size-xl);
+            margin-top: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-green-primary);
+        }
+        
+        .about-section p {
+            font-size: var(--font-size-lg);
+            line-height: 1.8;
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        body.dark-mode .about-section p {
+            color: var(--color-gray-400);
+        }
+        
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .skill-category {
+            background: var(--color-gray-50);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--color-green-primary);
+        }
+        
+        body.dark-mode .skill-category {
+            background: var(--color-gray-800);
+        }
+        
+        .skill-category h4 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-green-primary);
+        }
+        
+        .skill-category ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .skill-category li {
+            padding: var(--spacing-sm) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--color-gray-700);
+        }
+        
+        body.dark-mode .skill-category li {
+            color: var(--color-gray-300);
+        }
+        
+        .skill-category li::before {
+            content: '✓';
+            color: var(--color-green-primary);
+            font-weight: 700;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .value-item {
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+        
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .value-item h4 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-gray-900);
+        }
+        
+        body.dark-mode .value-item h4 {
+            color: var(--color-white);
+        }
+        
+        .value-item p {
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
+        
+        body.dark-mode .value-item p {
+            color: var(--color-gray-400);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--color-green-primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--spacing-2xl);
+            padding-left: var(--spacing-xl);
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--color-green-primary);
+            border-radius: var(--radius-full);
+            border: 3px solid var(--color-white);
+        }
+        
+        body.dark-mode .timeline-marker {
+            border-color: var(--color-gray-900);
+        }
+        
+        .timeline-date {
+            color: var(--color-green-primary);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .timeline-item h4 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .quote-box {
+            background: var(--color-gray-50);
+            padding: var(--spacing-2xl);
+            border-left: 4px solid var(--color-green-primary);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-2xl) 0;
+            font-style: italic;
+            font-size: var(--font-size-lg);
+            color: var(--color-gray-700);
+        }
+        
+        body.dark-mode .quote-box {
+            background: var(--color-gray-800);
+            color: var(--color-gray-300);
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: var(--spacing-3xl);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-xl);
+            margin-top: var(--spacing-4xl);
+        }
+        
+        body.dark-mode .cta-section {
+            background: var(--color-gray-900);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">HXQ<span>.dev</span></a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="certificates.html">Certificates</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button class="theme-toggle" aria-label="Toggle dark mode">🌙</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1>About Me</h1>
+            <p style="font-size: 1.25rem; color: var(--color-gray-600); max-width: 600px; margin: 0 auto;">
+                Câu chuyện, hành trình và định hướng nghề nghiệp của tôi
+            </p>
+        </div>
+    </section>
+
+    <div class="about-content">
+        <div class="about-intro">
+            <div class="about-avatar">HXQ</div>
+            <div class="about-bio">
+                <h2>Xin chào! 👋</h2>
+                <p>
+                    Tôi là <strong>Huỳnh Xuân Quý</strong>, sinh viên năm 4 ngành Công nghệ Thông tin, định hướng trở thành một Full-Stack Developer với chuyên môn chính là Frontend.
+                </p>
+                <p>
+                    Tôi có hơn 2 năm kinh nghiệm thực hành thông qua các dự án cá nhân, dự án nhóm và môi trường thực tế. Tôi cũng đã tham gia nhiều vòng phỏng vấn và quen thuộc với quy trình tuyển dụng ngành IT.
+                </p>
+                <p>
+                    Tôi tin rằng <strong>làm việc nhóm hiệu quả và chia sẻ kiến thức</strong> là nền tảng cốt lõi để tạo ra những sản phẩm chất lượng nhất.
+                </p>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>📖 Câu chuyện của tôi</h2>
+            <p>
+                Hành trình lập trình của tôi bắt đầu từ năm 2022. Những dòng HTML, CSS đầu tiên đã khơi gợi trong tôi niềm đam mê mãnh liệt với việc xây dựng các giao diện kỹ thuật số.
+            </p>
+            
+            <h3>🎓 Giai đoạn học tập & phát triển</h3>
+            <p>
+                Quá trình tự học giúp tôi rèn luyện tính kiên nhẫn và tư duy logic. Tôi không chỉ dừng lại ở việc "code chạy" mà luôn tập trung vào việc hiểu bản chất vấn đề, cách tổ chức code khoa học và tối ưu hóa trải nghiệm người dùng (UX).
+            </p>
+            
+            <h3>💼 Dự án & trải nghiệm thực tế</h3>
+            <p>
+                Từ những website đơn giản ban đầu, tôi dần xây dựng các hệ thống có cấu trúc rõ ràng, tiệm cận môi trường production. Tôi đã học được cách làm việc nhóm, phân chia nhiệm vụ, review code và không ngừng cải tiến sản phẩm.
+            </p>
+            
+            <div class="quote-box">
+                "The only way to do great work is to love what you do."
+            </div>
+            
+            <p>
+                Tôi tin rằng khi thực sự yêu thích công việc, việc học hỏi những công nghệ mới như cách giải quyết các lỗi compilation phức tạp sẽ trở thành một niềm vui tự nhiên.
+            </p>
+        </div>
+
+        <div class="about-section">
+            <h2>💪 Kỹ năng & Chuyên môn</h2>
+            <div class="skills-list">
+                <div class="skill-category">
+                    <h4>Frontend (Chuyên môn chính)</h4>
+                    <ul>
+                        <li>React & Next.js</li>
+                        <li>TypeScript</li>
+                        <li>Tailwind CSS</li>
+                        <li>Responsive Design</li>
+                        <li>Performance Optimization</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Backend (Định hướng Full-Stack)</h4>
+                    <ul>
+                        <li>Node.js & Express</li>
+                        <li>RESTful APIs</li>
+                        <li>MongoDB & PostgreSQL</li>
+                        <li>System Architecture</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Mobile Development</h4>
+                    <ul>
+                        <li>React Native</li>
+                        <li>Flutter (iOS & Android)</li>
+                        <li>Cross-platform Apps</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>Tools & Management</h4>
+                    <ul>
+                        <li>Git & GitHub (Workflow)</li>
+                        <li>Docker & AWS</li>
+                        <li>CI/CD & Agile/Scrum</li>
+                        <li>Team Leadership</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>🚀 Hành trình nghề nghiệp</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-date">2024 - Present</div>
+                    <h4>Frontend Developer (Student Developer)</h4>
+                    <p>Thực hành thực tế với React/Next.js. Tối ưu UI/UX và quản lý điều phối nhóm trong các dự án học tập và cá nhân.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-date">2023 - 2024</div>
+                    <h4>Junior Frontend Developer</h4>
+                    <p>Làm việc nhóm chuyên nghiệp, thực hiện code review, áp dụng clean code và xây dựng dự án quy mô vừa.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-date">2022 - 2023</div>
+                    <h4>Hành trình tự học</h4>
+                    <p>Xây dựng nền tảng tư duy lập trình với HTML, CSS và JavaScript. Phát triển kỹ năng tự nghiên cứu tài liệu kỹ thuật.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>🎯 Giá trị & Triết lý làm việc</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">📚</div>
+                    <h4>Học hỏi không ngừng</h4>
+                    <p>Luôn cập nhật công nghệ mới và cải thiện tư duy kỹ thuật mỗi ngày.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">🤝</div>
+                    <h4>Chia sẻ & Kết nối</h4>
+                    <p>Học tập hiệu quả nhất khi được trao đổi và làm việc cùng những người khác.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">💡</div>
+                    <h4>Code chất lượng</h4>
+                    <p>Ưu tiên mã nguồn dễ đọc, dễ bảo trì và có cấu trúc rõ ràng.</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">🎨</div>
+                    <h4>Tâm thế UX/UI</h4>
+                    <p>Trải nghiệm người dùng là yếu tố cốt lõi của một sản phẩm công nghệ thành công.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="margin-bottom: 1rem;">Let's work together!</h2>
+            <p style="color: var(--color-gray-600); margin-bottom: 2rem;">
+                Tôi luôn sẵn sàng trao đổi về công nghệ, dự án hoặc các cơ hội hợp tác nghề nghiệp.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="contact.html" class="btn btn-primary btn-lg">
+                    Contact Me 📧
+                </a>
+                <a href="portfolio.html" class="btn btn-secondary btn-lg">
+                    View My Work 💼
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>HXQ.dev</h3>
+                <p>Hành trình của một sinh viên năm 4 đam mê Flutter và Web Development.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Khám phá</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="pages/blog.html">Blog</a></li>
+                    <li><a href="pages/about.html">Thông tin</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Huỳnh Xuân Quý. Final Year Student Portfolio.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
