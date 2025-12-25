@@ -1,0 +1,417 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Phát triển Đồ án chuyên ngành với Flutter & Supabase",
+      "slug": "phat-trien-do-an-chuyen-nganh-flutter-firebase",
+      "excerpt": "Hành trình xây dựng ứng dụng di động đa nền tảng, từ việc thiết kế giao diện Material Design đến cách quản lý luồng dữ liệu thời gian thực và tối ưu hóa mã nguồn Dart...",
+      "category": "Project",
+      "date": "2025-12-20",
+      "readTime": "12 min read",
+      "views": 2847,
+      "image": "🎓",
+      "content": {
+        "intro": "Đồ án chuyên ngành là cột mốc quan trọng trong hành trình học tập của mình. Sau nhiều đêm thức trắng và vô số lần debug, mình đã hoàn thành một ứng dụng quản lý công việc cá nhân với Flutter và Supabase. Trong bài viết này, mình sẽ chia sẻ toàn bộ quá trình từ ý tưởng đến sản phẩm hoàn chỉnh.",
+        "sections": [
+          {
+            "title": "Tại sao chọn Flutter?",
+            "content": "Ban đầu mình cũng phân vân giữa React Native và Flutter. Nhưng sau khi nghiên cứu, mình quyết định chọn Flutter vì:\n\n• **Performance tốt hơn**: Flutter compile sang native code nên mượt mà hơn\n• **Hot Reload nhanh**: Tiết kiệm rất nhiều thời gian develop\n• **Material Design đẹp**: Widgets có sẵn rất nhiều và đẹp\n• **Cộng đồng lớn**: Dễ tìm tài liệu và giải đáp thắc mắc\n\nÀ, và quan trọng nhất là thầy hướng dẫn cũng recommend Flutter nên mình yên tâm hơn khi gặp khó khăn có thể xin support."
+          },
+          {
+            "title": "Kiến trúc ứng dụng",
+            "content": "Mình áp dụng Clean Architecture với BLoC pattern. Thoạt đầu setup hơi mất công nhưng về sau rất đáng:\n\n```dart\nlib/\n├── core/\n│   ├── constants/\n│   ├── utils/\n│   └── theme/\n├── features/\n│   ├── auth/\n│   │   ├── data/\n│   │   ├── domain/\n│   │   └── presentation/\n│   └── tasks/\n│       ├── data/\n│       ├── domain/\n│       └── presentation/\n└── main.dart\n```\n\nCấu trúc này giúp code dễ test và maintain. Khi cần thêm feature mới, chỉ cần tạo folder trong features/ là xong."
+          },
+          {
+            "title": "Tích hợp Supabase",
+            "content": "Supabase thực sự là game changer! Setup auth chỉ mất 30 phút:\n\n```dart\nfinal supabase = Supabase.instance.client;\n\n// Sign up\nawait supabase.auth.signUp(\n  email: email,\n  password: password,\n);\n\n// Realtime subscription\nsupabase\n  .from('tasks')\n  .stream(primaryKey: ['id'])\n  .listen((data) {\n    // Update UI real-time\n  });\n```\n\nCái hay nhất là Realtime! Khi thêm task ở điện thoại, laptop tự động update luôn. Demo cho thầy cô xong ai cũng wow."
+          },
+          {
+            "title": "Những khó khăn gặp phải",
+            "content": "**1. State Management phức tạp**\nLúc đầu mình dùng setState() nhưng app phình to ra thì lộn xộn quá. Phải refactor sang BLoC mất cả tuần. Nhưng xong xuôi thì code sạch đẹp hẳn.\n\n**2. Handle Offline Mode**\nĐiện thoại mất mạng thì app crash. Phải implement caching với Hive và retry mechanism. Cái này tốn nhiều thời gian nhất.\n\n**3. Push Notification**\nFirebase Cloud Messaging setup khá rối rắm với cả iOS lẫn Android. Mất 3 ngày để xử lý permission và background notification.\n\n**4. Build APK lỗi**\nLần đầu build release thì lỗi ProGuard. May có anh bạn đã đi làm hướng dẫn fix file `proguard-rules.pro`."
+          },
+          {
+            "title": "Kết quả đạt được",
+            "content": "Sau 3 tháng miệt mài:\n\n✅ **Điểm số**: 9.5/10 (cao nhất lớp luôn!)\n✅ **Download**: 50+ người bạn trong trường đang xài\n✅ **Performance**: 60 FPS mượt mà trên cả Android lẫn iOS\n✅ **Features**: Auth, CRUD Tasks, Real-time sync, Push notification, Dark mode\n✅ **Lines of Code**: ~5000 dòng Dart code\n\nThầy hướng dẫn khen là đồ án chỉn chu, có thể phát triển thành sản phẩm thương mại. Nghe xong động lực làm tiếp luôn!"
+          },
+          {
+            "title": "Bài học kinh nghiệm",
+            "content": "**Nên làm:**\n• Plan trước khi code, vẽ sơ đồ Database và UI flow\n• Commit code thường xuyên lên Git (tránh mất code như mình 😅)\n• Viết test cases cho các chức năng quan trọng\n• Hỏi ý kiến bạn bè và thầy cô sớm\n\n**Không nên:**\n• Copy code mà không hiểu (debug mệt lắm)\n• Làm hết rồi mới test (lỗi chồng chất)\n• Cứng nhắc với plan ban đầu (đôi khi phải pivot)\n• Làm một mình không ai review code\n\n**Tip quan trọng nhất**: Đừng chờ đến phút chót! Mình bắt đầu từ tháng 7, làm dần dần nên không stress. Bạn cùng phòng làm 1 tháng cuối thì stress kinh khủng."
+          }
+        ],
+        "conclusion": "Đồ án này không chỉ giúp mình đạt điểm cao mà còn học được rất nhiều kỹ năng thực tế: Clean Architecture, State Management, Backend integration, và quan trọng nhất là tư duy giải quyết vấn đề. Nếu bạn đang chuẩn bị làm đồ án, hãy chọn công nghệ bạn thích và đừng ngại thử nghiệm. Good luck! 🚀"
+      },
+      "tableOfContents": [
+        { "id": "intro", "title": "Giới thiệu" },
+        { "id": "why-flutter", "title": "Tại sao chọn Flutter?" },
+        { "id": "architecture", "title": "Kiến trúc ứng dụng" },
+        { "id": "supabase", "title": "Tích hợp Supabase" },
+        { "id": "challenges", "title": "Những khó khăn gặp phải" },
+        { "id": "results", "title": "Kết quả đạt được" },
+        { "id": "lessons", "title": "Bài học kinh nghiệm" },
+        { "id": "conclusion", "title": "Tổng kết" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Giải quyết lỗi 'Invalid constant value' trong Flutter",
+      "slug": "flutter-invalid-constant-value-opacity-fix",
+      "excerpt": "Tại sao không nên dùng static const cho màu có opacity? Cách dùng Getter function để ép giá trị tính toán tại runtime cực hiệu quả...",
+      "category": "Mobile",
+      "date": "2025-12-15",
+      "readTime": "7 min read",
+      "views": 1523,
+      "image": "📱",
+      "content": {
+        "intro": "Hôm qua mình gặp lỗi siêu kinh điển khi code Flutter: 'Invalid constant value'. Debug mãi mới ra, nên viết bài này để các bạn khỏi mất thời gian như mình.",
+        "sections": [
+          {
+            "title": "Vấn đề gặp phải",
+            "content": "Mình đang define theme colors cho app:\n\n```dart\nclass AppColors {\n  static const primaryColor = Color(0xFF2ECC71);\n  static const backgroundColor = primaryColor.withOpacity(0.1); // ❌ LỖI!\n}\n```\n\nCompiler báo ngay: **'Invalid constant value'**. Lúc đầu mình nghĩ là syntax sai, đọc lại tài liệu mãi không hiểu sao."
+          },
+          {
+            "title": "Nguyên nhân",
+            "content": "Vấn đề nằm ở chữ **const**!\n\n• `const` có nghĩa là giá trị phải được xác định tại **compile time**\n• Nhưng `.withOpacity()` là một **method call** → tính toán tại **runtime**\n• Dart không thể tính toán method call tại compile time\n\nNói dễ hiểu: Dart muốn biết giá trị chính xác ngay khi compile code, nhưng `.withOpacity()` thì phải chạy mới tính được."
+          },
+          {
+            "title": "Giải pháp 1: Bỏ const",
+            "content": "Cách đơn giản nhất:\n\n```dart\nclass AppColors {\n  static const primaryColor = Color(0xFF2ECC71);\n  static final backgroundColor = primaryColor.withOpacity(0.1); // ✅\n}\n```\n\nĐổi `const` thành `final`. Vậy là chạy được!\n\n**Nhưng** cách này có nhược điểm: mỗi lần access `backgroundColor`, Flutter phải tính toán lại `.withOpacity(0.1)` → hơi lãng phí performance."
+          },
+          {
+            "title": "Giải pháp 2: Getter (Recommended)",
+            "content": "Cách pro hơn là dùng **getter function**:\n\n```dart\nclass AppColors {\n  static const primaryColor = Color(0xFF2ECC71);\n  \n  // Getter - tính toán khi cần\n  static Color get backgroundColor => primaryColor.withOpacity(0.1);\n  static Color get cardBackground => primaryColor.withOpacity(0.05);\n  static Color get borderColor => primaryColor.withOpacity(0.3);\n}\n```\n\n**Ưu điểm:**\n• Code sạch, dễ đọc\n• Có thể thêm logic phức tạp vào getter\n• Không cần cache nếu không cần thiết"
+          },
+          {
+            "title": "Giải pháp 3: Cache với lazy initialization",
+            "content": "Nếu muốn tối ưu performance hơn nữa:\n\n```dart\nclass AppColors {\n  static const primaryColor = Color(0xFF2ECC71);\n  \n  static Color? _cachedBackgroundColor;\n  static Color get backgroundColor {\n    _cachedBackgroundColor ??= primaryColor.withOpacity(0.1);\n    return _cachedBackgroundColor!;\n  }\n}\n```\n\nLần đầu gọi sẽ tính toán và cache lại. Các lần sau lấy từ cache luôn → super fast!"
+          },
+          {
+            "title": "So sánh các cách",
+            "content": "| Cách | Pros | Cons | Khi nào dùng |\n|------|------|------|-------------|\n| `final` | Đơn giản | Tính lại mỗi lần | App nhỏ, ít màu |\n| `getter` | Clean code | Tính lại mỗi lần | App vừa, code đẹp |\n| `getter + cache` | Performance tốt | Code dài hơn | App lớn, nhiều màu |\n\nCá nhân mình thích dùng **getter** vì balance giữa clean code và performance."
+          },
+          {
+            "title": "Bonus: Apply cho các case khác",
+            "content": "Pattern này áp dụng được cho nhiều trường hợp:\n\n```dart\nclass AppStyles {\n  // ❌ SAI\n  static const titleStyle = TextStyle(\n    fontSize: 24,\n    color: AppColors.primaryColor.withOpacity(0.9),\n  );\n  \n  // ✅ ĐÚNG\n  static TextStyle get titleStyle => TextStyle(\n    fontSize: 24,\n    color: AppColors.primaryColor.withOpacity(0.9),\n  );\n}\n\nclass AppDimensions {\n  static const baseSize = 16.0;\n  \n  // ✅ Getter cho giá trị tính toán\n  static double get smallSize => baseSize * 0.75;\n  static double get largeSize => baseSize * 1.5;\n}\n```"
+          }
+        ],
+        "conclusion": "Lỗi 'Invalid constant value' là lỗi mình hay gặp khi mới học Flutter. Hiểu được sự khác biệt giữa compile-time và runtime sẽ giúp bạn tránh được nhiều lỗi tương tự. Nhớ là: const = compile time, final/getter = runtime. Happy coding! 🎯"
+      },
+      "tableOfContents": [
+        { "id": "problem", "title": "Vấn đề gặp phải" },
+        { "id": "reason", "title": "Nguyên nhân" },
+        { "id": "solution1", "title": "Giải pháp 1: Bỏ const" },
+        { "id": "solution2", "title": "Giải pháp 2: Getter" },
+        { "id": "solution3", "title": "Giải pháp 3: Cache" },
+        { "id": "comparison", "title": "So sánh các cách" },
+        { "id": "bonus", "title": "Bonus tips" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Kinh nghiệm phỏng vấn thực tập sinh Frontend",
+      "slug": "kinh-nghiem-phong-van-intern-frontend",
+      "excerpt": "Tổng hợp bộ câu hỏi về ES6+, React Hooks và cách mình thuyết phục nhà tuyển dụng thông qua tư duy giải quyết vấn đề...",
+      "category": "Web",
+      "date": "2025-12-05",
+      "readTime": "9 min read",
+      "views": 3156,
+      "image": "💼",
+      "content": {
+        "intro": "Tuần trước mình vừa pass phỏng vấn intern Frontend tại một startup công nghệ ở Sài Gòn. Chia sẻ ngay kinh nghiệm và câu hỏi phỏng vấn thực tế để các bạn chuẩn bị tốt hơn!",
+        "sections": [
+          {
+            "title": "Chuẩn bị trước phỏng vấn",
+            "content": "**1. Review kiến thức nền:**\n• HTML/CSS cơ bản (Flexbox, Grid, Responsive)\n• JavaScript ES6+ (Arrow function, Destructuring, Promises)\n• React basics (Components, Props, State, Lifecycle)\n• Git commands thường dùng\n\n**2. Làm project cá nhân:**\nMình đã build một To-Do App với React + TypeScript và deploy lên Vercel. Điều quan trọng là phải **hiểu rõ code mình viết**, đừng copy paste!\n\n**3. Chuẩn bị câu hỏi:**\nMình note sẵn 5-7 câu hỏi về công ty, team size, tech stack, workflow để hỏi lại interviewer. Điều này show là mình serious với công việc."
+          },
+          {
+            "title": "Câu hỏi kỹ thuật thực tế",
+            "content": "**Vòng 1: JavaScript Fundamentals**\n\n1️⃣ *Sự khác biệt giữa var, let, const?*\n→ Mình giải thích về scope, hoisting, và immutability\n\n2️⃣ *Arrow function khác function thường như thế nào?*\n→ Nhấn mạnh về `this` binding và không có `arguments`\n\n3️⃣ *Promise là gì? Async/await khác gì?*\n→ Mình code demo luôn một hàm fetch API\n\n4️⃣ *Giải thích Event Loop trong JavaScript*\n→ Vẽ diagram Call Stack, Task Queue, Web APIs\n\n**Vòng 2: React**\n\n1️⃣ *useState vs useEffect khác nhau thế nào?*\n→ Demo live code một counter component\n\n2️⃣ *Khi nào component re-render?*\n→ Liệt kê: state change, props change, parent re-render\n\n3️⃣ *useMemo và useCallback dùng khi nào?*\n→ Giải thích về optimization và memorization\n\n4️⃣ *Code một custom hook đơn giản*\n→ Mình viết `useLocalStorage` hook ngay trong interview"
+          },
+          {
+            "title": "Coding Challenge",
+            "content": "Đề bài: **Build một Search Filter cho list users**\n\nYêu cầu:\n• Fetch data từ API\n• Filter theo name\n• Debounce input để tối ưu\n• Handle loading và error states\n\n```jsx\nfunction UserList() {\n  const [users, setUsers] = useState([]);\n  const [search, setSearch] = useState('');\n  const [loading, setLoading] = useState(false);\n  \n  // Debounce search\n  const debouncedSearch = useDebounce(search, 500);\n  \n  useEffect(() => {\n    fetchUsers(debouncedSearch);\n  }, [debouncedSearch]);\n  \n  // ... render UI\n}\n```\n\n**Điểm mình được khen:**\n✅ Code clean, có comments\n✅ Handle edge cases (empty state, error)\n✅ Tối ưu với debounce\n✅ Responsive design\n✅ Accessibility (keyboard navigation)"
+          },
+          {
+            "title": "Phần mềm kỹ năng",
+            "content": "Không phải chỉ code giỏi là đủ! Interviewer cũng đánh giá:\n\n**Communication:**\n• Giải thích tư duy khi code\n• Hỏi lại nếu không hiểu đề\n• Thừa nhận khi không biết, nhưng show cách tìm hiểu\n\n**Problem Solving:**\n• Break down vấn đề thành các phần nhỏ\n• Code từng bước, test kỹ\n• Tối ưu dần dần, đừng làm perfect ngay\n\n**Teamwork:**\n• Chia sẻ về kinh nghiệm làm việc nhóm\n• Cách resolve conflict trong team\n• Sẵn sàng học hỏi từ senior\n\n**Attitude:**\n• Thể hiện passion với coding\n• Hỏi về cơ hội học tập và phát triển\n• Positive mindset"
+          },
+          {
+            "title": "Những sai lầm cần tránh",
+            "content": "❌ **Đừng:**\n• Nói 'em không biết' rồi im lặng\n• Viết code mà không giải thích\n• Quá tự tin hoặc quá khiêm tốn\n• Copy code từ Google ngay trước mặt interviewer\n• Nói xấu công ty/trường cũ\n• Hỏi lương ngay câu đầu tiên\n\n✅ **Nên:**\n• 'Em chưa rõ lắm, nhưng em nghĩ là...'\n• Code và giải thích đồng thời\n• Tự tin nhưng khiêm tốn\n• Tham khảo docs nếu được phép\n• Kể về experience một cách professional\n• Hỏi lương ở cuối, sau khi đã impress"
+          },
+          {
+            "title": "Tips Pass phỏng vấn",
+            "content": "🎯 **Trước phỏng vấn 1 tuần:**\n• Ôn lại fundamentals\n• Làm coding challenges trên LeetCode Easy\n• Review lại projects đã làm\n• Chuẩn bị câu 'Giới thiệu về bản thân'\n\n🎯 **Trước phỏng vấn 1 ngày:**\n• Research về công ty, sản phẩm\n• Đọc lại JD, note các keyword\n• Chuẩn bị câu hỏi để hỏi lại\n• Check thiết bị (laptop, mic, camera nếu online)\n\n🎯 **Trong phỏng vấn:**\n• Đúng giờ (sớm 5-10 phút)\n• Chào hỏi lịch sự, mỉm cười\n• Eye contact và body language tự tin\n• Take notes nếu cần\n\n🎯 **Sau phỏng vấn:**\n• Gửi thank you email trong 24h\n• Note lại câu hỏi để học thêm\n• Không stress quá về kết quả"
+          }
+        ],
+        "conclusion": "Phỏng vấn intern không khó như mình nghĩ! Quan trọng là chuẩn bị kỹ, tự tin và cho họ thấy passion của mình với coding. Dù pass hay fail, mỗi lần phỏng vấn đều là bài học quý giá. Chúc các bạn thành công! 💪"
+      },
+      "tableOfContents": [
+        { "id": "preparation", "title": "Chuẩn bị trước phỏng vấn" },
+        { "id": "technical", "title": "Câu hỏi kỹ thuật" },
+        { "id": "coding", "title": "Coding Challenge" },
+        { "id": "soft-skills", "title": "Kỹ năng mềm" },
+        { "id": "mistakes", "title": "Sai lầm cần tránh" },
+        { "id": "tips", "title": "Tips Pass phỏng vấn" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Tư duy hướng đối tượng (OOP) trong Java Spring Boot",
+      "slug": "tu-duy-oop-java-spring-boot",
+      "excerpt": "Áp dụng các nguyên lý SOLID và Design Patterns vào dự án Backend để mã nguồn dễ bảo trì và mở rộng hơn cho đồ án chuyên ngành...",
+      "category": "Backend",
+      "date": "2025-11-28",
+      "readTime": "11 min read",
+      "views": 1892,
+      "image": "⚙️",
+      "content": {
+        "intro": "Học OOP từ năm 2 nhưng đến khi làm project Spring Boot thực tế mình mới thực sự hiểu OOP là gì. Bài viết này mình sẽ chia sẻ cách áp dụng SOLID và Design Patterns vào project backend một cách dễ hiểu nhất.",
+        "sections": [
+          {
+            "title": "Từ code 'mì ống' đến Clean Code",
+            "content": "**Code ban đầu của mình (năm 2):**\n\n```java\npublic class UserController {\n    public String createUser(String name, String email) {\n        // Validate\n        if (name == null || email == null) {\n            return \"Error: null input\";\n        }\n        \n        // Connect DB\n        Connection conn = DriverManager.getConnection(...);\n        \n        // Insert\n        String sql = \"INSERT INTO users...\";\n        \n        // Send email\n        EmailService.send(email, \"Welcome!\");\n        \n        // Log\n        System.out.println(\"User created\");\n        \n        return \"Success\";\n    }\n}\n```\n\n❌ **Vấn đề:**\n• Controller làm quá nhiều việc\n• Khó test vì phụ thuộc nhiều thứ\n• Thay đổi DB phải sửa Controller\n• Không thể reuse logic\n\n**Sau khi học SOLID:**\n\n```java\n@RestController\npublic class UserController {\n    private final UserService userService;\n    \n    public UserController(UserService userService) {\n        this.userService = userService;\n    }\n    \n    @PostMapping(\"/users\")\n    public ResponseEntity<UserDTO> createUser(@RequestBody CreateUserRequest request) {\n        UserDTO user = userService.createUser(request);\n        return ResponseEntity.ok(user);\n    }\n}\n```\n\n✅ **Cải thiện:**\n• Controller chỉ handle HTTP logic\n• Business logic nằm ở Service\n• Dễ test với mock\n• Clean và maintainable"
+          },
+          {
+            "title": "SOLID Principles - Hiểu thực tế",
+            "content": "**S - Single Responsibility Principle**\n\nMỗi class chỉ làm 1 việc. Ví dụ:\n\n```java\n// ❌ SAI: Class làm quá nhiều việc\npublic class User {\n    public void saveToDatabase() { }\n    public void sendEmail() { }\n    public void generateReport() { }\n}\n\n// ✅ ĐÚNG: Tách riêng từng responsibility\npublic class User { } // Domain model\npublic class UserRepository { } // Database\npublic class EmailService { } // Email\npublic class ReportService { } // Report\n```\n\n**O - Open/Closed Principle**\n\nMở cho mở rộng, đóng cho sửa đổi:\n\n```java\n// Interface cho payment\npublic interface PaymentStrategy {\n    void pay(double amount);\n}\n\n// Implement cho từng loại\npublic class CreditCardPayment implements PaymentStrategy {\n    public void pay(double amount) { }\n}\n\npublic class MomoPayment implements PaymentStrategy {\n    public void pay(double amount) { }\n}\n\n// Thêm payment mới không cần sửa code cũ\npublic class ZaloPayPayment implements PaymentStrategy {\n    public void pay(double amount) { }\n}\n```\n\n**L - Liskov Substitution**\n\nSubclass phải thay thế được Superclass:\n\n```java\npublic class Bird {\n    public void eat() { }\n}\n\npublic class FlyingBird extends Bird {\n    public void fly() { } // OK: thêm method mới\n}\n\npublic class Penguin extends Bird {\n    // OK: không bắt penguin phải fly()\n}\n```\n\n**I - Interface Segregation**\n\nKhông ép implement method không dùng:\n\n```java\n// ❌ SAI: Interface quá lớn\ninterface Worker {\n    void work();\n    void eat();\n    void sleep();\n}\n\n// ✅ ĐÚNG: Tách nhỏ\ninterface Workable { void work(); }\ninterface Eatable { void eat(); }\ninterface Sleepable { void sleep(); }\n```\n\n**D - Dependency Inversion**\n\nPhụ thuộc vào abstraction, không phải concrete:\n\n```java\n// ❌ SAI: Phụ thuộc vào MySQL\npublic class UserService {\n    private MySQLDatabase db = new MySQLDatabase();\n}\n\n// ✅ ĐÚNG: Phụ thuộc vào interface\npublic class UserService {\n    private final Database db; // Interface\n    \n    public UserService(Database db) {\n        this.db = db; // Inject từ ngoài\n    }\n}\n```"
+          },
+          {
+            "title": "Design Patterns hay dùng",
+            "content": "**1. Singleton Pattern**\n\nChỉ có 1 instance duy nhất:\n\n```java\n@Configuration\npublic class DatabaseConfig {\n    @Bean\n    @Scope(\"singleton\") // Default trong Spring\n    public DataSource dataSource() {\n        return new HikariDataSource();\n    }\n}\n```\n\nSpring tự động handle Singleton rồi nên mình chỉ cần dùng `@Bean`.\n\n**2. Factory Pattern**\n\nTạo object mà không expose logic:\n\n```java\npublic class NotificationFactory {\n    public static Notification create(String type) {\n        switch(type) {\n            case \"email\":\n                return new EmailNotification();\n            case \"sms\":\n                return new SMSNotification();\n            case \"push\":\n                return new PushNotification();\n            default:\n                throw new IllegalArgumentException();\n        }\n    }\n}\n```\n\n**3. Repository Pattern**\n\nAbstract data layer:\n\n```java\npublic interface UserRepository extends JpaRepository<User, Long> {\n    Optional<User> findByEmail(String email);\n    List<User> findByAgeGreaterThan(int age);\n    \n    @Query(\"SELECT u FROM User u WHERE u.status = :status\")\n    List<User> findActiveUsers(@Param(\"status\") String status);\n}\n```\n\nSpring Data JPA đã implement Repository pattern sẵn, mình chỉ cần extends.\n\n**4. Service Layer Pattern**\n\n```java\n@Service\npublic class UserService {\n    private final UserRepository userRepository;\n    private final EmailService emailService;\n    \n    @Transactional\n    public UserDTO createUser(CreateUserRequest request) {\n        // Business logic\n        User user = new User(request.getName(), request.getEmail());\n        \n        // Save\n        user = userRepository.save(user);\n        \n        // Send welcome email\n        emailService.sendWelcomeEmail(user.getEmail());\n        \n        return new UserDTO(user);\n    }\n}\n```"
+          },
+          {
+            "title": "Áp dụng vào Đồ án",
+            "content": "**Dự án của mình: E-commerce Backend**\n\n**Kiến trúc 3-layer:**\n\n```\nController Layer\n    ↓\nService Layer (Business Logic)\n    ↓\nRepository Layer (Data Access)\n```\n\n**Folder Structure:**\n\n```\nsrc/main/java/com/myshop/\n├── controller/\n│   ├── ProductController.java\n│   ├── OrderController.java\n│   └── UserController.java\n├── service/\n│   ├── ProductService.java\n│   ├── OrderService.java\n│   └── UserService.java\n├── repository/\n│   ├── ProductRepository.java\n│   ├── OrderRepository.java\n│   └── UserRepository.java\n├── model/\n│   ├── Product.java\n│   ├── Order.java\n│   └── User.java\n├── dto/\n│   ├── ProductDTO.java\n│   └── OrderDTO.java\n├── exception/\n│   └── ResourceNotFoundException.java\n└── config/\n    └── SecurityConfig.java\n```\n\n**Example: Order Service với SOLID**\n\n```java\n@Service\npublic class OrderService {\n    private final OrderRepository orderRepository;\n    private final ProductService productService;\n    private final PaymentStrategy paymentStrategy;\n    private final NotificationService notificationService;\n    \n    @Transactional\n    public OrderDTO createOrder(CreateOrderRequest request) {\n        // 1. Validate products\n        validateProducts(request.getItems());\n        \n        // 2. Calculate total\n        double total = calculateTotal(request.getItems());\n        \n        // 3. Create order\n        Order order = new Order();\n        order.setItems(request.getItems());\n        order.setTotal(total);\n        order.setStatus(OrderStatus.PENDING);\n        \n        // 4. Save\n        order = orderRepository.save(order);\n        \n        // 5. Process payment\n        paymentStrategy.pay(total);\n        \n        // 6. Update stock\n        productService.updateStock(request.getItems());\n        \n        // 7. Send notification\n        notificationService.sendOrderConfirmation(order);\n        \n        return new OrderDTO(order);\n    }\n    \n    private void validateProducts(List<OrderItem> items) {\n        // Validation logic\n    }\n    \n    private double calculateTotal(List<OrderItem> items) {\n        // Calculation logic\n    }\n}\n```\n\n**Benefits khi demo cho thầy:**\n✅ Code dễ đọc, dễ hiểu\n✅ Test được từng layer riêng\n✅ Thêm payment method mới chỉ cần add class\n✅ Thay đổi DB không ảnh hưởng Service\n✅ Reuse logic ở nhiều nơi"
+          },
+          {
+            "title": "Testing với OOP tốt",
+            "content": "Khi code theo SOLID, test dễ dàng hơn nhiều:\n\n```java\n@SpringBootTest\nclass OrderServiceTest {\n    @Mock\n    private OrderRepository orderRepository;\n    \n    @Mock\n    private ProductService productService;\n    \n    @Mock\n    private PaymentStrategy paymentStrategy;\n    \n    @InjectMocks\n    private OrderService orderService;\n    \n    @Test\n    void createOrder_Success() {\n        // Given\n        CreateOrderRequest request = new CreateOrderRequest();\n        Order order = new Order();\n        \n        when(orderRepository.save(any())).thenReturn(order);\n        when(paymentStrategy.pay(anyDouble())).thenReturn(true);\n        \n        // When\n        OrderDTO result = orderService.createOrder(request);\n        \n        // Then\n        assertNotNull(result);\n        verify(orderRepository).save(any());\n        verify(paymentStrategy).pay(anyDouble());\n    }\n}\n```\n\nNhờ Dependency Injection, mình có thể mock tất cả dependencies và test riêng từng method."
+          },
+          {
+            "title": "Bài học kinh nghiệm",
+            "content": "**Những gì mình học được:**\n\n1️⃣ **Don't over-engineer**\nLúc đầu mình apply quá nhiều patterns, code phức tạp vô ích. Hãy bắt đầu đơn giản, refactor dần.\n\n2️⃣ **Understand before apply**\nĐừng dùng pattern vì nó 'cool'. Hiểu vấn đề, chọn pattern phù hợp.\n\n3️⃣ **Practice makes perfect**\nĐọc sách thì dễ, code thực tế mới thấy khó. Phải làm project mới hiểu sâu.\n\n4️⃣ **Code review helps**\nNhờ senior review code, mình học được nhiều cách tối ưu.\n\n**Tài liệu mình đã học:**\n📚 Clean Code - Robert C. Martin\n📚 Head First Design Patterns\n📚 Spring Boot Documentation\n📚 Refactoring Guru (website về patterns)\n\n**Tips cho bạn:**\n• Bắt đầu với 1 pattern đơn giản (như Factory)\n• Refactor code cũ thay vì viết mới\n• Xem code của open source projects\n• Tham gia code review với bạn bè"
+          }
+        ],
+        "conclusion": "OOP và Design Patterns không chỉ là lý thuyết trong sách vở. Khi áp dụng đúng cách, code của bạn sẽ clean, maintainable và scalable hơn rất nhiều. Đồ án của mình đạt 9/10 phần lớn nhờ kiến trúc tốt. Keep learning and refactoring! 🚀"
+      },
+      "tableOfContents": [
+        { "id": "intro", "title": "Từ code 'mì ống' đến Clean Code" },
+        { "id": "solid", "title": "SOLID Principles" },
+        { "id": "patterns", "title": "Design Patterns hay dùng" },
+        { "id": "project", "title": "Áp dụng vào Đồ án" },
+        { "id": "testing", "title": "Testing với OOP" },
+        { "id": "lessons", "title": "Bài học kinh nghiệm" }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Làm việc nhóm hiệu quả với quy trình Agile/Scrum",
+      "slug": "lam-viec-nhom-voi-agile-scrum",
+      "excerpt": "Cách mình và team điều phối dự án, phân chia task trên Trello và giải quyết xung đột khi cùng tham gia code một sản phẩm...",
+      "category": "Project",
+      "date": "2025-11-15",
+      "readTime": "8 min read",
+      "views": 2134,
+      "image": "🤝",
+      "content": {
+        "intro": "Làm việc nhóm là thử thách lớn nhất trong đồ án môn học. Team mình 4 người, mỗi người một style code, một múi giờ làm việc khác nhau. Sau nhiều lần 'đụng độ' và học hỏi, chúng mình đã tìm ra quy trình làm việc hiệu quả với Agile/Scrum.",
+        "sections": [
+          {
+            "title": "Tại sao cần quy trình?",
+            "content": "**Những vấn đề team mình gặp ban đầu:**\n\n❌ Ai cũng làm feature giống nhau (duplicate work)\n❌ Code conflict liên tục khi merge\n❌ Không ai biết ai đang làm gì\n❌ Deadline gần mới hoảng loạn làm\n❌ Một người carry cả team (usually là mình 😅)\n❌ Họp 2 tiếng mà không ra quyết định gì\n\n**Sau khi áp dụng Agile/Scrum:**\n\n✅ Mỗi người có task riêng, không overlap\n✅ Code được review trước khi merge\n✅ Daily standup 15 phút, ai cũng update tiến độ\n✅ Làm việc theo sprint 2 tuần, không stress\n✅ Workload được phân chia đều\n✅ Họp ngắn gọn, hiệu quả\n\nProject hoàn thành đúng hạn, điểm cao, và quan trọng nhất là team vẫn friendly với nhau sau project! 🎉"
+          },
+          {
+            "title": "Setup Trello cho Scrum Board",
+            "content": "**Columns trên board của team mình:**\n\n```\n📋 Backlog → 📝 To Do → 👷 In Progress → 👀 Review → ✅ Done\n```\n\n**1. Backlog (Product Backlog)**\nChứa tất cả features cần làm trong project:\n\n• User Authentication (8 story points)\n• Product CRUD (5 points)\n• Shopping Cart (13 points)\n• Payment Integration (8 points)\n• Admin Dashboard (13 points)\n\n**2. To Do (Sprint Backlog)**\nCác task trong sprint hiện tại (2 tuần):\n\n• Design Login UI\n• Implement JWT Authentication\n• Write Unit Tests for Auth\n\nMỗi card có:\n• Title: tên task\n• Description: chi tiết cần làm\n• Assignee: người phụ trách\n• Label: Frontend/Backend/Design/Testing\n• Due date: deadline\n• Checklist: các subtask nhỏ\n\n**3. In Progress**\nĐang code, limit tối đa 2 cards/người:\n\n```\nCard: Implement Login API\nAssigned: Quý\nLabel: Backend\nProgress: 60%\nChecklist:\n✅ Create User model\n✅ Setup JWT\n🔲 Write login endpoint\n🔲 Handle errors\n🔲 Write tests\n```\n\n**4. Review**\nCode xong, đợi teammate review:\n\n• Attach link Pull Request\n• Tag người review\n• Không tự move sang Done\n\n**5. Done**\nĐã merge vào main branch và pass tests.\n\n**Trello Power-Ups mình dùng:**\n• GitHub Integration: link PR tự động\n• Calendar: xem deadline\n• Card Aging: highlight card quá lâu không move\n• Voting: team vote priority"
+          },
+          {
+            "title": "Sprint Planning thực tế",
+            "content": "**Cách team mình chạy Sprint:**\n\n**Sprint Duration:** 2 tuần (vừa đủ, không quá dài)\n\n**Sprint Planning Meeting (2 giờ):**\n\n📅 **Thứ 2 đầu sprint, 7PM**\n\n**Agenda:**\n1. Review sprint trước (15 phút)\n   • Demo features đã làm\n   • Retrospective: gì tốt, gì cần cải thiện\n\n2. Planning sprint mới (1h 30 phút)\n   • Product Owner (leader) present backlog\n   • Team estimate story points cho từng task\n   • Pick tasks vào sprint (dựa vào velocity)\n   • Break down tasks thành subtasks\n   • Assign tasks cho members\n\n3. Set sprint goal (15 phút)\n   • Mục tiêu sprint này là gì?\n   • Ví dụ: \"Complete user authentication module\"\n\n**Planning Poker để estimate:**\n\n```\nMình: \"Login API - bao nhiêu points?\"\nBạn A: 🃏 3 points\nBạn B: 🃏 5 points\nBạn C: 🃏 8 points\nMình: 🃏 5 points\n\n→ Discuss sao lại khác nhau\n→ Bạn C nghĩ phải handle OAuth, security\n→ Re-vote: Agree 8 points\n```\n\n**Story Points của team mình:**\n• 1 point: ~2 giờ (fix bug nhỏ)\n• 3 points: ~4-6 giờ (feature nhỏ)\n• 5 points: ~1 ngày (feature vừa)\n• 8 points: ~2-3 ngày (feature phức tạp)\n• 13 points: ~1 tuần (quá lớn, nên break down)\n\n**Velocity team mình:** ~30-40 points/sprint\n→ Không pick quá nhiều tasks!"
+          },
+          {
+            "title": "Daily Standup - Họp 15 phút",
+            "content": "**Format chuẩn:**\n\n⏰ **Mỗi tối 9PM (sau khi mọi người học xong)**\n\nMỗi người trả lời 3 câu hỏi:\n\n1️⃣ **Yesterday:** Hôm qua làm được gì?\n2️⃣ **Today:** Hôm nay sẽ làm gì?\n3️⃣ **Blockers:** Có vấn đề gì cản trở?\n\n**Ví dụ thực tế:**\n\n**Quý:**\n• Yesterday: Hoàn thành Login API, viết unit tests\n• Today: Integrate với Frontend, fix bug validate email\n• Blockers: None\n\n**Bạn A (Frontend):**\n• Yesterday: Design Login UI với Figma\n• Today: Code Login form với React\n• Blockers: Chưa có API endpoint → **Quý sẽ share**\n\n**Bạn B (Mobile):**\n• Yesterday: Setup Flutter project\n• Today: Implement navigation\n• Blockers: Không hiểu BLoC pattern → **Mình sẽ pair programming**\n\n**Bạn C (Testing):**\n• Yesterday: Viết test cases cho auth flow\n• Today: Automated testing với Selenium\n• Blockers: None\n\n**Rules quan trọng:**\n⏱️ Max 15 phút (dùng timer)\n🚫 Không thảo luận chi tiết (after meeting)\n💬 Update trên Trello nếu không join được\n🎥 Họp qua Google Meet nếu không gặp trực tiếp"
+          },
+          {
+            "title": "Code Review Process",
+            "content": "**Quy trình Pull Request của team:**\n\n**1. Tạo PR đúng format:**\n\n```markdown\n## Description\nImplement login API with JWT authentication\n\n## Changes\n- Create User model and repository\n- Implement login endpoint\n- Add JWT token generation\n- Write unit tests (coverage 85%)\n\n## Testing\n- ✅ Unit tests pass\n- ✅ Postman tested successfully\n- ✅ No merge conflicts\n\n## Screenshots\n[Attach screenshots if needed]\n\n## Checklist\n- [x] Code follows style guide\n- [x] Tests added\n- [x] Documentation updated\n- [x] No console.log left\n\n@teamA @teamB Please review!\n```\n\n**2. Review checklist:**\n\nReviewer phải check:\n✅ Code logic đúng không?\n✅ Có bugs tiềm ẩn?\n✅ Performance OK?\n✅ Code readable?\n✅ Tests đủ cover?\n✅ Security issues?\n\n**3. Feedback constructive:**\n\n❌ **Bad feedback:**\n\"Code này tệ quá, viết lại đi!\"\n\n✅ **Good feedback:**\n```\n💡 Suggestion: Có thể dùng async/await \nthay vì .then() để code dễ đọc hơn.\n\nExample:\n// Current\nfetchUsers().then(data => { ... })\n\n// Suggested\nconst data = await fetchUsers();\n```\n\n**4. Merge requirements:**\n\n• Tối thiểu 2 approvals\n• All tests passed\n• No conflicts\n• Reviewer đã test lại trên local\n\n**5. Sau khi merge:**\n\n• Delete branch\n• Move Trello card sang Done\n• Update documentation nếu cần\n• Notify team trên group chat"
+          },
+          {
+            "title": "Xử lý conflict trong team",
+            "content": "**Case 1: Ai cũng muốn làm frontend**\n\n🔴 **Vấn đề:** Không ai muốn làm backend\n\n✅ **Giải pháp:**\n• Sprint 1: Quý làm backend, A làm frontend\n• Sprint 2: Rotate, A làm backend, Quý làm frontend\n• Mọi người đều học được cả 2\n\n**Case 2: Member không active**\n\n🔴 **Vấn đề:** Bạn C hay missing meeting, tasks chậm\n\n✅ **Giải pháp:**\n1. Private chat 1-1 để hỏi có vấn đề gì không\n2. Có thể do schedule bận, adjust task nhẹ hơn\n3. Nếu vẫn không improve, báo với thầy/cô\n\n**Case 3: Ý kiến khác nhau về tech stack**\n\n🔴 **Vấn đề:** A muốn dùng MongoDB, B muốn MySQL\n\n✅ **Giải pháp:**\n1. Meeting để debate (có data, không cảm tính)\n2. List pros/cons từng option\n3. Vote (majority wins)\n4. Nếu tie, leader quyết định\n5. Sau khi quyết định, all-in, không than vãn\n\n**Case 4: Code conflict khi merge**\n\n🔴 **Vấn đề:** 2 người sửa cùng 1 file\n\n✅ **Giải pháp:**\n1. Người merge sau phải resolve conflict\n2. Không tự ý xóa code người khác\n3. Hỏi ý kiến người viết code gốc\n4. Test kỹ sau khi resolve\n\n**Golden rules:**\n🤝 Respect: tôn trọng ý kiến của nhau\n💬 Communication: nói rõ vấn đề, đừng giữ trong lòng\n🎯 Focus on goal: mục tiêu chung là hoàn thành project\n😊 Stay positive: không blame, cùng nhau giải quyết"
+          },
+          {
+            "title": "Tools team mình dùng",
+            "content": "**Project Management:**\n• Trello: Sprint board, task tracking\n• Google Calendar: Deadline, meetings\n\n**Communication:**\n• Messenger Group: Chat nhanh\n• Discord: Voice call, screen share\n• Email: Formal communication với thầy\n\n**Development:**\n• GitHub: Version control, PR, Issues\n• VS Code + Live Share: Pair programming\n• Postman: API testing\n• Figma: Design collaboration\n\n**Documentation:**\n• Google Docs: Meeting notes, decisions\n• Notion: Project documentation, wiki\n• Draw.io: Diagrams, flowcharts\n\n**Testing:**\n• Jest: Unit testing\n• Postman: API testing\n• Selenium: E2E testing\n\n**Deployment:**\n• Vercel: Frontend hosting\n• Railway: Backend hosting\n• MongoDB Atlas: Database\n\nHầu hết đều free, perfect cho sinh viên! 💯"
+          }
+        ],
+        "conclusion": "Làm việc nhóm không dễ, nhưng với quy trình rõ ràng và communication tốt, team sẽ làm việc hiệu quả hơn rất nhiều. Agile/Scrum không chỉ là lý thuyết cho công ty lớn, sinh viên cũng apply được và rất practical. Quan trọng nhất là respect và support lẫn nhau! 💪"
+      },
+      "tableOfContents": [
+        { "id": "why", "title": "Tại sao cần quy trình?" },
+        { "id": "trello", "title": "Setup Trello" },
+        { "id": "sprint", "title": "Sprint Planning" },
+        { "id": "standup", "title": "Daily Standup" },
+        { "id": "review", "title": "Code Review" },
+        { "id": "conflict", "title": "Xử lý conflict" },
+        { "id": "tools", "title": "Tools sử dụng" }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Master Git: Quy trình Git Flow cho dự án sinh viên",
+      "slug": "master-git-flow-du-an-sinh-vien",
+      "excerpt": "Hướng dẫn sử dụng Branch, Pull Request và giải quyết Conflict khi làm việc nhóm để tránh mất mát mã nguồn...",
+      "category": "Backend",
+      "date": "2025-10-30",
+      "readTime": "6 min read",
+      "views": 2891,
+      "image": "🌿",
+      "content": {
+        "intro": "Tuần trước team mình suýt mất hết code vì không biết dùng Git đúng cách. Sau 1 đêm thức trắng để recover, mình quyết định viết bài này để các bạn khỏi phải trải qua nỗi đau như mình 😭",
+        "sections": [
+          {
+            "title": "Git Flow là gì?",
+            "content": "**Git Flow** là một quy trình làm việc với Git giúp team làm việc song song mà không đụng độ code.\n\n**Branching Strategy:**\n\n```\nmain (production)\n  |\n  ├── develop (development)\n  │     |\n  │     ├── feature/login\n  │     ├── feature/payment\n  │     └── feature/dashboard\n  |\n  └── hotfix/critical-bug\n```\n\n**Giải thích:**\n• **main**: Code production, luôn stable, chỉ merge khi đã test kỹ\n• **develop**: Code development, nơi merge tất cả features\n• **feature/***: Branch cho từng feature, tách riêng\n• **hotfix/***: Fix bug gấp trên production\n\n**Tại sao không commit trực tiếp lên main?**\n❌ Code lỗi sẽ làm crash app cho cả team\n❌ Không thể rollback dễ dàng\n❌ Conflict liên tục khi nhiều người code\n❌ Không có code review"
+          },
+          {
+            "title": "Setup Git cho project nhóm",
+            "content": "**Bước 1: Leader tạo repository**\n\n```bash\n# Tạo repo trên GitHub\n# Add members vào repo (Settings → Collaborators)\n```\n\n**Bước 2: Clone về máy**\n\n```bash\ngit clone https://github.com/team/project.git\ncd project\n```\n\n**Bước 3: Setup branches**\n\n```bash\n# Tạo develop branch\ngit checkout -b develop\ngit push origin develop\n\n# Bảo vệ main branch\n# GitHub → Settings → Branches → Add rule\n# ✅ Require pull request before merging\n# ✅ Require approvals (tối thiểu 1-2 người)\n# ✅ Require status checks to pass\n```\n\n**Bước 4: Git config cho team**\n\n```bash\n# Set username và email\ngit config user.name \"Huỳnh Xuân Quý\"\ngit config user.email \"quy@example.com\"\n\n# Set default editor\ngit config core.editor \"code --wait\"\n\n# Enable color\ngit config color.ui auto\n\n# Check config\ngit config --list\n```\n\n**Bước 5: Tạo .gitignore**\n\n```bash\n# .gitignore cho Node.js\nnode_modules/\n.env\n.DS_Store\nbuild/\ndist/\n*.log\n\n# .gitignore cho Java\ntarget/\n*.class\n*.jar\n.idea/\n\n# .gitignore cho Flutter\n.dart_tool/\n.flutter-plugins\nbuild/\n```"
+          },
+          {
+            "title": "Workflow hàng ngày",
+            "content": "**Day 1: Nhận task mới**\n\n```bash\n# 1. Checkout develop branch\ngit checkout develop\n\n# 2. Pull code mới nhất\ngit pull origin develop\n\n# 3. Tạo feature branch\ngit checkout -b feature/login\n\n# Naming convention:\n# feature/tên-feature\n# bugfix/tên-bug\n# hotfix/tên-hotfix\n```\n\n**Day 2-3: Code feature**\n\n```bash\n# Làm xong 1 phần nhỏ → commit\ngit add .\ngit commit -m \"feat: add login form UI\"\n\n# Code tiếp → commit\ngit commit -m \"feat: implement login API call\"\n\n# Push lên GitHub thường xuyên (backup)\ngit push origin feature/login\n```\n\n**Commit message convention:**\n\n```\nfeat: thêm feature mới\nfix: fix bug\nrefactor: refactor code\nstyle: thay đổi style, format\ndocs: update documentation\ntest: thêm tests\nchore: các thay đổi nhỏ khác\n\nVí dụ:\nfeat: add user authentication\nfix: resolve login validation error\nrefactor: extract API calls to service layer\n```\n\n**Day 4: Tạo Pull Request**\n\n```bash\n# 1. Đảm bảo code mới nhất từ develop\ngit checkout develop\ngit pull origin develop\n\n# 2. Merge develop vào feature branch\ngit checkout feature/login\ngit merge develop\n\n# 3. Resolve conflicts nếu có\n# 4. Test lại code\n\n# 5. Push\ngit push origin feature/login\n\n# 6. Tạo PR trên GitHub\n# Compare: feature/login → develop\n```\n\n**Day 5: Review và merge**\n\n```bash\n# Sau khi được approve\n# GitHub sẽ tự merge hoặc:\ngit checkout develop\ngit merge feature/login\ngit push origin develop\n\n# Xóa branch cũ\ngit branch -d feature/login\ngit push origin --delete feature/login\n```"
+          },
+          {
+            "title": "Giải quyết Merge Conflict",
+            "content": "**Scenario:** Bạn và teammate đều sửa file `user.service.js`\n\n**1. Conflict xuất hiện:**\n\n```bash\ngit merge develop\n# CONFLICT (content): Merge conflict in user.service.js\n# Automatic merge failed; fix conflicts and then commit\n```\n\n**2. Mở file bị conflict:**\n\n```javascript\n<<<<<<< HEAD (code của bạn)\nexport const loginUser = async (email, password) => {\n  return await api.post('/auth/login', { email, password });\n};\n=======\nexport const login = (email, pass) => {\n  return api.post('/login', { email, pass });\n};\n>>>>>>> develop (code từ develop)\n```\n\n**3. Resolve conflict:**\n\nChọn 1 trong 3 cách:\n\n**Cách 1: Giữ code của mình**\n```javascript\nexport const loginUser = async (email, password) => {\n  return await api.post('/auth/login', { email, password });\n};\n```\n\n**Cách 2: Giữ code từ develop**\n```javascript\nexport const login = (email, pass) => {\n  return api.post('/login', { email, pass });\n};\n```\n\n**Cách 3: Kết hợp cả 2 (best practice)**\n```javascript\nexport const loginUser = async (email, password) => {\n  return await api.post('/auth/login', { \n    email, \n    password \n  });\n};\n\nexport const login = loginUser; // Keep compatibility\n```\n\n**4. Commit resolve:**\n\n```bash\n# Xóa hết <<<, ===, >>>\ngit add user.service.js\ngit commit -m \"resolve: merge conflict in user service\"\ngit push origin feature/login\n```\n\n**Tips tránh conflict:**\n✅ Pull develop thường xuyên\n✅ Commit nhỏ, thường xuyên\n✅ Communication: báo trước khi sửa file chung\n✅ Code review sớm\n✅ Không để code lâu mới merge"
+          },
+          {
+            "title": "Git Commands quan trọng",
+            "content": "**Check status:**\n```bash\ngit status              # Xem file đã thay đổi\ngit log --oneline       # Xem commit history\ngit branch -a           # List all branches\ngit remote -v           # Xem remote repository\n```\n\n**Làm việc với commits:**\n```bash\n# Undo commit (giữ changes)\ngit reset --soft HEAD~1\n\n# Undo commit (xóa changes)\ngit reset --hard HEAD~1\n\n# Amend commit message\ngit commit --amend -m \"new message\"\n\n# Revert commit (safe)\ngit revert <commit-hash>\n```\n\n**Làm việc với branches:**\n```bash\n# Switch branch\ngit checkout develop\n\n# Tạo và switch\ngit checkout -b feature/new-feature\n\n# Delete branch\ngit branch -d feature/old-feature\n\n# Rename branch\ngit branch -m old-name new-name\n```\n\n**Stash changes:**\n```bash\n# Save changes tạm thời\ngit stash\n\n# List stashes\ngit stash list\n\n# Apply stash\ngit stash pop\n\n# Apply specific stash\ngit stash apply stash@{0}\n```\n\n**Làm việc với remote:**\n```bash\n# Fetch updates\ngit fetch origin\n\n# Pull (fetch + merge)\ngit pull origin develop\n\n# Push\ngit push origin feature/login\n\n# Force push (dangerous!)\ngit push -f origin feature/login\n```\n\n**Xem changes:**\n```bash\n# Diff unstaged changes\ngit diff\n\n# Diff staged changes\ngit diff --staged\n\n# Diff giữa 2 branches\ngit diff develop feature/login\n\n# Xem file trong commit cũ\ngit show HEAD:file.js\n```"
+          },
+          {
+            "title": "Các tình huống thường gặp",
+            "content": "**Case 1: Push nhầm code lên main**\n\n```bash\n# Revert commit\ngit revert HEAD\ngit push origin main\n\n# Hoặc reset (nếu chưa ai pull)\ngit reset --hard HEAD~1\ngit push -f origin main\n```\n\n**Case 2: Quên tạo branch, code luôn trên develop**\n\n```bash\n# Stash changes\ngit stash\n\n# Tạo branch mới\ngit checkout -b feature/my-feature\n\n# Apply changes\ngit stash pop\n\n# Commit\ngit add .\ngit commit -m \"feat: my feature\"\n```\n\n**Case 3: Code conflict quá nhiều, muốn reset**\n\n```bash\n# Abort merge\ngit merge --abort\n\n# Hoặc reset về commit cũ\ngit reset --hard HEAD\n```\n\n**Case 4: Muốn xóa commit đã push**\n\n```bash\n# Revert (safe, tạo commit mới)\ngit revert <commit-hash>\ngit push origin feature/login\n\n# Reset (dangerous, xóa history)\ngit reset --hard HEAD~1\ngit push -f origin feature/login\n```\n\n**Case 5: Lỡ xóa branch chưa merge**\n\n```bash\n# Tìm commit hash\ngit reflog\n\n# Restore branch\ngit checkout -b feature/recovered <commit-hash>\n```\n\n**Emergency: Mất hết code local**\n\n```bash\n# May mắn đã push lên GitHub\ngit fetch origin\ngit checkout origin/feature/login\ngit checkout -b feature/login\n\n# Đây là lý do phải push thường xuyên!\n```"
+          },
+          {
+            "title": "Best Practices",
+            "content": "**DO ✅**\n• Commit nhỏ, thường xuyên với message rõ ràng\n• Pull develop trước khi bắt đầu code mỗi ngày\n• Push code lên GitHub ít nhất 1 lần/ngày (backup!)\n• Test kỹ trước khi tạo PR\n• Code review kỹ càng\n• Resolve conflict cẩn thận, hỏi ý kiến nếu không chắc\n\n**DON'T ❌**\n• Commit file không cần thiết (node_modules, .env)\n• Force push lên main hoặc develop\n• Commit message kiểu 'asdasd', 'fix', 'update'\n• Để code lâu mới commit (conflict nhiều hơn)\n• Merge mà không test\n• Xóa code người khác khi resolve conflict\n\n**Git Ignore Template:**\n\n```bash\n# Dependencies\nnode_modules/\nvendor/\n\n# Environment\n.env\n.env.local\n\n# IDE\n.vscode/\n.idea/\n*.swp\n\n# OS\n.DS_Store\nThumbs.db\n\n# Build\nbuild/\ndist/\n*.log\n\n# Database\n*.sqlite\n*.db\n```"
+          }
+        ],
+        "conclusion": "Git là skill bắt buộc phải biết khi làm việc nhóm. Thoạt đầu có vẻ phức tạp nhưng practice nhiều sẽ quen. Nhớ là: commit thường xuyên, pull trước khi code, push để backup, và đừng ngại hỏi khi gặp conflict! Happy coding! 🌿"
+      },
+      "tableOfContents": [
+        { "id": "intro", "title": "Git Flow là gì?" },
+        { "id": "setup", "title": "Setup Git" },
+        { "id": "workflow", "title": "Workflow hàng ngày" },
+        { "id": "conflict", "title": "Giải quyết Conflict" },
+        { "id": "commands", "title": "Commands quan trọng" },
+        { "id": "scenarios", "title": "Tình huống thường gặp" },
+        { "id": "best-practices", "title": "Best Practices" }
+      ]
+    },
+    {
+    "id": 7,
+    "title": "Tối ưu UI/UX: Từ bản vẽ Figma đến mã nguồn React",
+    "slug": "toi-uu-ui-ux-figma-to-react",
+    "excerpt": "Hành trình chuyển đổi từ bản thiết kế Design sang giao diện Responsive, Pixel-Perfect sử dụng Tailwind CSS và Framer Motion...",
+    "category": "Web",
+    "date": "2025-10-12",
+    "readTime": "10 min read",
+    "views": 2456,
+    "image": "🎨",
+    "content": {
+      "intro": "Đồ án môn Thiết kế giao diện yêu cầu mình phải tự design trên Figma rồi code thành website thật. Từ một người không biết gì về design, sau 1 tháng mình đã tạo được một landing page khá ổn. Chia sẻ hành trình từ Figma đến React!",
+      "sections": [
+        {
+          "title": "Design System trong Figma",
+          "content": "Trước khi vẽ bất cứ thứ gì, mình tạo design system bao gồm Colors, Typography và Spacing (8pt Grid). Việc này giúp giao diện nhất quán và khi code với Tailwind CSS cực kỳ nhanh vì chỉ cần cấu hình trong file config."
+        },
+        {
+          "title": "Code Hero Section với Tailwind",
+          "content": "Sử dụng Grid và Flexbox của Tailwind để tái hiện lại bố cục. Một mẹo nhỏ là sử dụng các class như `hover:scale-105` và `transition-all` để tạo cảm giác mượt mà cho các button như trên bản vẽ Figma."
+        },
+        {
+          "title": "Hiệu ứng với Framer Motion",
+          "content": "Để web không bị 'chết', mình dùng Framer Motion. Ví dụ: \n\n```jsx\n<motion.div \n  initial={{ opacity: 0 }}\n  whileInView={{ opacity: 1 }}\n> \n  {content} \n</motion.div>\n```\nHiệu ứng scroll-reveal này luôn làm thầy cô ấn tượng khi chấm bài."
+        }
+      ],
+      "conclusion": "Từ Figma sang React không chỉ là cắt ghép ảnh, mà là thấu hiểu ý đồ thiết kế. Chúc các bạn có những giao diện pixel-perfect!"
+    },
+    "tableOfContents": [
+      { "id": "design-system", "title": "Design System" },
+      { "id": "hero-section", "title": "Code Hero Section" },
+      { "id": "animations", "title": "Hiệu ứng" }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Deploy ứng dụng lên Cloud: AWS vs Vercel vs Railway",
+    "slug": "deploy-ung-dung-len-cloud-comparison",
+    "excerpt": "Lựa chọn nền tảng phù hợp để đưa đồ án của bạn lên internet. So sánh chi phí, độ khó và hiệu năng cho sinh viên...",
+    "category": "DevOps",
+    "date": "2025-09-25",
+    "readTime": "8 min read",
+    "views": 1920,
+    "image": "☁️",
+    "content": {
+      "intro": "Code xong dưới local là một chuyện, đưa lên mạng cho người khác dùng lại là chuyện khác. Mình đã thử qua nhiều bên và đây là đúc kết cho các bạn làm đồ án.",
+      "sections": [
+        {
+          "title": "Vercel: Thiên đường cho Frontend",
+          "content": "Nếu bạn dùng React, Next.js hay Vue, không có gì qua được Vercel. Chỉ cần kết nối với GitHub, mỗi lần push code là tự động deploy. Lại còn miễn phí cho cá nhân (Hobby plan)."
+        },
+        {
+          "title": "Railway: Cứu cánh cho Backend và DB",
+          "content": "Sau khi Heroku không còn miễn phí, Railway là lựa chọn số 1 của mình để deploy Node.js, Java Spring Boot hay PostgreSQL. Giao diện cực kỳ trực quan, chỉ cần vứt Dockerfile vào là chạy."
+        },
+        {
+          "title": "AWS: Sân chơi cho 'Pro'",
+          "content": "AWS có gói Free Tier 12 tháng nhưng rất dễ bị 'hớ' tiền nếu không cẩn thận. Mình chỉ dùng EC2 khi cần cấu hình sâu vào server. Lời khuyên: Nếu chỉ làm đồ án, hãy ưu tiên Vercel/Railway trước."
+        }
+      ],
+      "conclusion": "Đừng để code ngủ quên trong máy. Hãy chọn một nền tảng và 'on air' sản phẩm của bạn ngay hôm nay!"
+    },
+    "tableOfContents": [
+      { "id": "vercel", "title": "Vercel" },
+      { "id": "railway", "title": "Railway" },
+      { "id": "aws", "title": "AWS" }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Bí quyết thuyết trình Đồ án: Chinh phục Hội đồng",
+    "slug": "bi-quyet-thuyet-trinh-do-an-dat-diem-cao",
+    "excerpt": "Kỹ năng mềm quyết định 30% điểm số. Cách chuẩn bị slide, demo sản phẩm và trả lời câu hỏi phản biện từ thầy cô...",
+    "category": "Soft Skills",
+    "date": "2025-09-10",
+    "readTime": "11 min read",
+    "views": 4210,
+    "image": "🎤",
+    "content": {
+      "intro": "Bạn có thể code rất giỏi, nhưng nếu không biết cách trình bày, thầy cô sẽ không thấy được hết giá trị sản phẩm. Đây là kinh nghiệm giúp mình đạt điểm tuyệt đối phần thuyết trình.",
+      "sections": [
+        {
+          "title": "Cấu trúc Slide 'vừa đủ'",
+          "content": "Đừng cho quá nhiều chữ! Tập trung vào: Vấn đề (Pain point) -> Giải pháp -> Kiến trúc hệ thống -> Demo -> Kết quả. Dùng hình ảnh và sơ đồ thay cho liệt kê dòng chữ."
+        },
+        {
+          "title": "Kịch bản Demo 'phòng thủ'",
+          "content": "Luôn chuẩn bị một video quay sẵn màn hình demo (backup). Nếu lúc thuyết trình mà mạng lag hay lỗi server, bạn vẫn có cái để show. Nhớ demo những feature 'wow' nhất ngay từ đầu."
+        },
+        {
+          "title": "Đối mặt với câu hỏi phản biện",
+          "content": "Khi thầy hỏi khó, hãy bình tĩnh. Nếu không biết, hãy trả lời: 'Em chưa tìm hiểu kỹ phần này, nhưng theo hướng tiếp cận hiện tại em nghĩ là...'. Thầy cô đánh giá cao tư duy hơn là việc bạn phải biết mọi thứ."
+        }
+      ],
+      "conclusion": "Tự tin là chìa khóa. Bạn là người hiểu sản phẩm của mình nhất, hãy tỏa sáng!"
+    },
+    "tableOfContents": [
+      { "id": "slides", "title": "Cấu trúc Slide" },
+      { "id": "demo", "title": "Kịch bản Demo" },
+      { "id": "q-and-a", "title": "Trả lời phản biện" }
+    ]
+  }
+]
+}

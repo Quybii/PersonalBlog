@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Chi tiết bài viết">
-    <title>Blog Detail - Huỳnh Xuân Quý</title>
-    
-    <!-- CSS -->
+    <meta name="description" content="Chi tiết bài viết - Huỳnh Xuân Quý">
+    <title>Đang tải bài viết... - Huỳnh Xuân Quý</title>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/dark-mode.js" defer></script>
+    <script src="../js/navigation.js" defer></script>
+    <script src="../js/blog-detail-loader.js" defer></script>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/blog.css">
     <link rel="stylesheet" href="../css/dark-mode.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <nav>
-            <a href="index.html" class="logo">HXQ<span>.dev</span></a>
+            <a href="../index.html" class="logo">HXQ<span>.dev</span></a>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
             <ul class="nav-links">
-                <li><a href="../index.html" class="active">Trang chủ</a></li>
-                <li><a href="blog.html">Hành trình</a></li>
+                <li><a href="../index.html">Trang chủ</a></li>
+                <li><a href="blog.html" class="active">Hành trình</a></li>
                 <li><a href="certificates.html">Chứng chỉ</a></li>
                 <li><a href="about.html">Về tôi</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
@@ -29,210 +30,37 @@
         </nav>
     </header>
 
-    <!-- Blog Detail Content -->
     <article class="blog-detail">
-        <!-- Header -->
-        <header class="blog-detail-header">
-            <span class="blog-detail-tag">Web Development</span>
-            <h1 class="blog-detail-title">Xây dựng Blog với Next.js 14 và TypeScript</h1>
-            <div class="blog-detail-meta">
-                <span class="blog-detail-meta-item">
-                    📅 December 15, 2025
-                </span>
-                <span class="blog-detail-meta-item">
-                    ⏱️ 8 min read
-                </span>
-                <span class="blog-detail-meta-item">
-                    👁️ 1,234 views
-                </span>
-            </div>
-        </header>
+        <header class="blog-detail-header"></header>
 
-        <!-- Featured Image -->
-        <div class="blog-detail-image">
-            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white;">
-                💻
-            </div>
-        </div>
+        <div class="blog-detail-image"></div>
 
-        <!-- Table of Contents -->
         <div class="toc">
             <h3 class="toc-title">📋 Nội dung bài viết</h3>
-            <ul>
-                <li><a href="#intro">Giới thiệu</a></li>
-                <li><a href="#setup">Setup dự án</a></li>
-                <li><a href="#architecture">Kiến trúc</a></li>
-                <li><a href="#experience">Kinh nghiệm cá nhân</a></li>
-                <li><a href="#conclusion">Tổng kết</a></li>
-            </ul>
+            <ul></ul>
         </div>
 
-        <!-- Content -->
         <div class="blog-content">
-            <h2 id="intro">🚀 Giới thiệu</h2>
-            <p>
-                Trong bài viết này, tôi sẽ chia sẻ chi tiết cách mình xây dựng một blog cá nhân hiện đại sử dụng Next.js 14 với App Router, TypeScript, và Tailwind CSS. Đây là những công nghệ tôi đã thử nghiệm và áp dụng thành công trong dự án thực tế.
-            </p>
-            
-            <p>
-                Next.js 14 đã mang đến nhiều cải tiến đáng kể so với các phiên bản trước, đặc biệt là với App Router và Server Components. Việc kết hợp với TypeScript giúp code trở nên an toàn và dễ maintain hơn rất nhiều.
-            </p>
-
-            <blockquote>
-                "The best way to learn is by building real projects. Don't just follow tutorials - create something meaningful."
-            </blockquote>
-
-            <h2 id="setup">⚙️ Setup dự án</h2>
-            <p>
-                Đầu tiên, chúng ta cần khởi tạo một project Next.js 14 mới. Tôi khuyên bạn nên sử dụng TypeScript ngay từ đầu để tận dụng tối đa các lợi ích của type safety.
-            </p>
-
-            <pre><code>npx create-next-app@latest my-blog --typescript --tailwind --app
-cd my-blog
-npm run dev</code></pre>
-
-            <p>
-                Command trên sẽ tạo một project Next.js 14 với App Router, TypeScript và Tailwind CSS đã được cấu hình sẵn. Đây là starting point hoàn hảo cho một blog hiện đại.
-            </p>
-
-            <h3>📦 Cài đặt các dependencies cần thiết</h3>
-            <p>Ngoài setup mặc định, chúng ta cần thêm một số packages để làm việc với MDX (Markdown + JSX):</p>
-
-            <pre><code>npm install @next/mdx @mdx-js/loader @mdx-js/react
-npm install gray-matter reading-time
-npm install -D @types/mdx</code></pre>
-
-            <h2 id="architecture">🏗️ Kiến trúc dự án</h2>
-            <p>
-                Một trong những điều quan trọng nhất khi xây dựng blog là có một kiến trúc rõ ràng, dễ mở rộng. Đây là cấu trúc thư mục mà tôi đang sử dụng:
-            </p>
-
-            <pre><code>my-blog/
-├── app/
-│   ├── blog/
-│   │   ├── [slug]/
-│   │   │   └── page.tsx
-│   │   └── page.tsx
-│   ├── layout.tsx
-│   └── page.tsx
-├── components/
-│   ├── BlogCard.tsx
-│   ├── Header.tsx
-│   └── Footer.tsx
-├── content/
-│   └── blog/
-│       ├── post-1.mdx
-│       └── post-2.mdx
-├── lib/
-│   └── blog.ts
-└── types/
-    └── blog.ts</code></pre>
-
-            <p>
-                Cấu trúc này giúp tách biệt rõ ràng giữa UI components, business logic, và content. Điều này rất quan trọng khi dự án phát triển lớn hơn.
-            </p>
-
-            <div class="blog-section">
-                <h3 class="blog-section-title">💡 Tips quan trọng</h3>
-                <ul>
-                    <li>Sử dụng Server Components cho performance tốt hơn</li>
-                    <li>Implement ISR (Incremental Static Regeneration) cho blog posts</li>
-                    <li>Setup sitemap và RSS feed cho SEO</li>
-                    <li>Sử dụng Image component của Next.js cho optimization</li>
-                </ul>
-            </div>
-
-            <h2 id="experience">💭 Kinh nghiệm cá nhân</h2>
-            <p>
-                Khi mới bắt đầu với Next.js 14, tôi đã gặp phải một số thách thức. Điều khó khăn nhất là phải thay đổi mindset từ Pages Router sang App Router. Nhưng sau khi hiểu được cách Server Components hoạt động, mọi thứ trở nên rõ ràng hơn rất nhiều.
-            </p>
-
-            <p>
-                Một sai lầm mà tôi đã mắc phải là cố gắng fetch data ở client side quá nhiều. Hãy tận dụng Server Components và async/await để fetch data trực tiếp trong components. Điều này giúp performance tăng đáng kể.
-            </p>
-
-            <blockquote>
-                "Don't be afraid to make mistakes. Every error is a learning opportunity. When I first started with Next.js 14, I spent hours debugging Server Components - but those hours taught me more than any documentation could."
-            </blockquote>
-
-            <h3>🎯 Những điều tôi học được</h3>
-            <ul>
-                <li>
-                    <strong>Server Components là default:</strong> Đừng dùng 'use client' trừ khi thực sự cần thiết
-                </li>
-                <li>
-                    <strong>MDX rất powerful:</strong> Bạn có thể embed React components trực tiếp trong Markdown
-                </li>
-                <li>
-                    <strong>TypeScript saves time:</strong> Mất thêm 20% thời gian để viết types, nhưng tiết kiệm 80% thời gian debug
-                </li>
-                <li>
-                    <strong>Performance matters:</strong> Sử dụng lighthouse và web vitals để đo lường và tối ưu
-                </li>
-            </ul>
-
-            <h2 id="conclusion">✨ Tổng kết</h2>
-            <p>
-                Xây dựng blog với Next.js 14 và TypeScript là một trải nghiệm tuyệt vời. Công nghệ này không chỉ giúp tạo ra một sản phẩm chất lượng mà còn dạy cho tôi rất nhiều về modern web development.
-            </p>
-
-            <p>
-                Nếu bạn đang có ý định tạo blog cá nhân, tôi thực sự khuyên bạn nên thử Next.js 14. Đừng ngại học những công nghệ mới - đó là cách tốt nhất để phát triển kỹ năng của bạn.
-            </p>
-
-            <p>
-                Hãy nhớ rằng: <strong>code tốt nhất là code bạn thực sự hiểu và có thể maintain được</strong>. Đừng chỉ copy-paste code mà hãy thực sự tìm hiểu tại sao nó hoạt động như vậy.
-            </p>
+            <p style="text-align: center; padding: 2rem;">Đang tải nội dung bài viết...</p>
         </div>
 
-        <!-- Author Section -->
         <div class="blog-author">
             <div class="blog-author-avatar">HXQ</div>
             <div class="blog-author-info">
                 <h3>Huỳnh Xuân Quý</h3>
                 <p>Full-Stack Developer | Chia sẻ kinh nghiệm thực tế về Web & Mobile Development</p>
                 <div style="margin-top: 0.5rem;">
-                    <a href="about.html" style="color: var(--color-green-primary); font-weight: 600;">
-                        Xem thêm về tôi →
-                    </a>
+                    <a href="about.html" style="color: var(--color-green-primary); font-weight: 600;">Xem thêm về tôi →</a>
                 </div>
             </div>
         </div>
 
-        <!-- Related Posts -->
         <div class="related-posts">
             <h2 class="related-posts-title">📚 Bài viết liên quan</h2>
-            <div class="related-posts-grid">
-                <article class="blog-card">
-                    <div class="blog-card-image">🚀</div>
-                    <div class="blog-card-content">
-                        <div class="blog-card-meta">
-                            <span class="blog-card-tag">Backend</span>
-                            <span>Dec 10, 2025</span>
-                        </div>
-                        <h3 class="blog-card-title">REST API Best Practices</h3>
-                        <p class="blog-card-excerpt">Những kinh nghiệm và pattern khi xây dựng RESTful API...</p>
-                        <a href="#" class="blog-read-more">Read More →</a>
-                    </div>
-                </article>
-
-                <article class="blog-card">
-                    <div class="blog-card-image">📘</div>
-                    <div class="blog-card-content">
-                        <div class="blog-card-meta">
-                            <span class="blog-card-tag">Web</span>
-                            <span>Nov 28, 2025</span>
-                        </div>
-                        <h3 class="blog-card-title">TypeScript: Tại sao bạn nên học?</h3>
-                        <p class="blog-card-excerpt">Lợi ích của TypeScript trong dự án thực tế...</p>
-                        <a href="#" class="blog-read-more">Read More →</a>
-                    </div>
-                </article>
-            </div>
+            <div class="related-posts-grid"></div>
         </div>
     </article>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -252,10 +80,5 @@ npm install -D @types/mdx</code></pre>
             <p>&copy; 2025 Huỳnh Xuân Quý. Final Year Student Portfolio.</p>
         </div>
     </footer>
-
-    <!-- JavaScript -->
-    <script src="../js/main.js"></script>
-    <script src="../js/dark-mode.js"></script>
-    <script src="../js/navigation.js"></script>
 </body>
 </html>
