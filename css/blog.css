@@ -25,7 +25,10 @@ body.dark-mode .blog-hero {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    line-height: 1.1;
+    
+    /* --- SỬA LỖI TẠI ĐÂY --- */
+    line-height: 1.2; /* Tăng từ 1.1 lên 1.2 để không bị cắt đuôi chữ 'g' */
+    padding-bottom: 0.1em; /* Thêm một chút đệm dưới để đổ bóng hoặc đuôi chữ hiển thị đủ */
 }
 
 /* Filter Bar: Tối ưu cho Mobile App View */
