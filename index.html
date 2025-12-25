@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/dark-mode.css">
     <style>
-        /* Hero & Layout tinh chỉnh */
+        /* --- GIỮ NGUYÊN STYLE GỐC VÀ TINH CHỈNH LAYOUT --- */
         .hero-section {
-            padding: 10rem 2rem 6rem;
+            padding: clamp(6rem, 10vh, 10rem) 2rem 6rem;
             background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent);
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
         }
         
         .hero-container {
@@ -23,6 +26,7 @@
             grid-template-columns: 1fr 400px;
             gap: 4rem;
             align-items: center;
+            width: 100%;
         }
 
         .hero-title {
@@ -35,8 +39,10 @@
 
         .hero-avatar {
             position: relative;
-            width: 380px;
-            height: 380px;
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 1/1;
+            margin: 0 auto;
         }
 
         .avatar-wrapper {
@@ -51,7 +57,6 @@
         }
 
         body.dark-mode .avatar-wrapper { border-color: var(--color-gray-800); }
-
         .avatar-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
         @keyframes morph {
@@ -59,15 +64,14 @@
             50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
         }
 
-        /* Styling cho phần Insight mới */
-        .insight-grid {
+        .insight-grid, .featured-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        .insight-card {
+        .insight-card, .card {
             background: var(--color-white);
             padding: 2.5rem;
             border-radius: 24px;
@@ -75,23 +79,20 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
-        body.dark-mode .insight-card {
+        body.dark-mode .insight-card, body.dark-mode .card {
             background: var(--color-gray-900);
             border-color: var(--color-gray-800);
         }
 
-        .insight-card:hover {
+        .insight-card:hover, .card:hover {
             transform: translateY(-10px);
             border-color: var(--color-green-primary);
             box-shadow: 0 20px 30px rgba(16, 185, 129, 0.1);
-        }
-
-        .insight-icon {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            display: block;
         }
 
         .insight-tag {
@@ -110,15 +111,26 @@
             padding: 0.2rem 0.6rem;
             border-radius: 4px;
             margin-right: 0.3rem;
+            margin-bottom: 0.3rem;
             color: var(--color-gray-600);
             display: inline-block;
         }
 
         body.dark-mode .tech-stack-tag { background: var(--color-gray-800); color: var(--color-gray-400); }
 
+        /* --- RESPONSIVE CHO MOBILE --- */
         @media (max-width: 992px) {
-            .hero-container { grid-template-columns: 1fr; text-align: center; }
-            .hero-avatar { margin: 0 auto; width: 300px; height: 300px; order: -1; }
+            .hero-container { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+            .hero-avatar { order: -1; max-width: 300px; }
+            .cta-group { justify-content: center; flex-wrap: wrap; }
+            .hero-subtitle { margin-left: auto; margin-right: auto; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title { font-size: 2.2rem; }
+            .cta-group .btn { width: 100%; }
+            .insight-card, .card { padding: 1.5rem; }
+            .featured-grid, .insight-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -167,10 +179,10 @@
             </div>
             
             <div class="featured-grid">
-                <div class="card" style="padding: 2.5rem; border-top: 4px solid var(--color-green-primary);">
+                <div class="card" style="border-top: 4px solid var(--color-green-primary);">
                     <span style="font-size: 2rem;">🌐</span>
                     <h3 style="margin: 1rem 0;">Frontend Engine</h3>
-                    <p style="font-size: 0.95rem; color: var(--color-gray-600); margin-bottom: 1.5rem;">Xây dựng Single Page Application (SPA) với kiến trúc component sạch, tối ưu hóa tốc độ render và SEO.</p>
+                    <p style="font-size: 0.95rem; color: var(--color-gray-600); margin-bottom: 1.5rem; flex-grow: 1;">Xây dựng Single Page Application (SPA) với kiến trúc component sạch, tối ưu hóa tốc độ render và SEO.</p>
                     <div class="tech-tags">
                         <span class="tech-stack-tag">React.js</span>
                         <span class="tech-stack-tag">Next.js</span>
@@ -178,10 +190,10 @@
                     </div>
                 </div>
 
-                <div class="card" style="padding: 2.5rem; border-top: 4px solid #027DFD;">
+                <div class="card" style="border-top: 4px solid #027DFD;">
                     <span style="font-size: 2rem;">📱</span>
                     <h3 style="margin: 1rem 0; color: #027DFD;">Flutter Development</h3>
-                    <p style="font-size: 0.95rem; color: var(--color-gray-600); margin-bottom: 1.5rem;">Phát triển ứng dụng Mobile native-like, xử lý mượt mà các bài toán về State Management và UI phức tạp.</p>
+                    <p style="font-size: 0.95rem; color: var(--color-gray-600); margin-bottom: 1.5rem; flex-grow: 1;">Phát triển ứng dụng Mobile native-like, xử lý mượt mà các bài toán về State Management và UI phức tạp.</p>
                     <div class="tech-tags">
                         <span class="tech-stack-tag">Dart</span>
                         <span class="tech-stack-tag">Flutter SDK</span>
@@ -189,10 +201,10 @@
                     </div>
                 </div>
 
-                <div class="card" style="padding: 2.5rem; border-top: 4px solid var(--color-green-primary);">
+                <div class="card" style="border-top: 4px solid var(--color-green-primary);">
                     <span style="font-size: 2rem;">🏛️</span>
                     <h3 style="margin: 1rem 0;">Architecture</h3>
-                    <p style="font-size: 0.95rem; color: var(--color-gray-600); margin-bottom: 1.5rem;">Tư duy lập trình hướng đối tượng (OOP), thiết kế cơ sở dữ liệu quan hệ và quy trình phát triển chuyên nghiệp.</p>
+                    <p style="font-size: 0.95rem; color: var(--color-gray-600); margin-bottom: 1.5rem; flex-grow: 1;">Tư duy lập trình hướng đối tượng (OOP), thiết kế cơ sở dữ liệu quan hệ và quy trình phát triển chuyên nghiệp.</p>
                     <div class="tech-tags">
                         <span class="tech-stack-tag">Java/C#</span>
                         <span class="tech-stack-tag">SQL Server</span>
@@ -211,31 +223,37 @@
 
                 <div class="insight-grid">
                     <article class="insight-card">
-                        <span class="insight-tag">Problem Solving</span>
-                        <h3 class="certificate-title">Xử lý Runtime Errors trong Flutter</h3>
-                        <p style="font-size: 0.95rem; color: var(--color-gray-600); margin: 1rem 0;">Sử dụng <strong>Getter Functions</strong> thay cho <code>static const</code> để xử lý màu sắc có opacity, giúp tránh lỗi Invalid constant value khi biên dịch.</p>
-                        <a href="pages/blog.html" style="color: var(--color-green-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem;">Đọc giải pháp chi tiết →</a>
+                        <span class="insight-tag">Project</span>
+                        <h3 class="certificate-title">Phát triển Đồ án chuyên ngành với Flutter & Supabase</h3>
+                        <p style="font-size: 0.95rem; color: var(--color-gray-600); margin: 1rem 0; flex-grow: 1;">
+                            Xây dựng ứng dụng di động đa nền tảng, từ thiết kế Material Design đến quản lý luồng dữ liệu thời gian thực và tối ưu hóa mã nguồn Dart.
+                        </p>
+                        <a href="pages/blog.html?slug=phat-trien-do-an-chuyen-nganh-flutter-firebase" style="color: var(--color-green-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem;">Đọc hành trình xây dựng →</a>
                     </article>
 
                     <article class="insight-card">
-                        <span class="insight-tag">UX Strategy</span>
-                        <h3 class="certificate-title">Tối ưu hóa trải nghiệm người dùng</h3>
-                        <p style="font-size: 0.95rem; color: var(--color-gray-600); margin: 1rem 0;">Áp dụng nguyên lý <strong>Responsive Design</strong> và Lazy Loading để tăng tốc độ tải trang và độ mượt khi tương tác trên mobile.</p>
-                        <a href="pages/blog.html" style="color: var(--color-green-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem;">Đọc phương pháp luận →</a>
+                        <span class="insight-tag">Career Journey</span>
+                        <h3 class="certificate-title">Kinh nghiệm phỏng vấn thực tập sinh Frontend</h3>
+                        <p style="font-size: 0.95rem; color: var(--color-gray-600); margin: 1rem 0; flex-grow: 1;">
+                            Tổng hợp bộ câu hỏi về ES6+, React Hooks và cách thuyết phục nhà tuyển dụng thông qua tư duy giải quyết vấn đề thực tế.
+                        </p>
+                        <a href="pages/blog.html?slug=kinh-nghiem-phong-van-intern-frontend" style="color: var(--color-green-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem;">Xem bộ câu hỏi →</a>
                     </article>
 
                     <article class="insight-card">
                         <span class="insight-tag">Management</span>
-                        <h3 class="certificate-title">Quản lý dự án với Agile/Scrum</h3>
-                        <p style="font-size: 0.95rem; color: var(--color-gray-600); margin: 1rem 0;">Kinh nghiệm điều phối nhóm nhỏ, phân chia task và kiểm soát tiến độ thông qua Git & Trello trong môi trường học thuật.</p>
-                        <a href="pages/blog.html" style="color: var(--color-green-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem;">Xem quy trình →</a>
+                        <h3 class="certificate-title">Làm việc nhóm hiệu quả với quy trình Agile/Scrum</h3>
+                        <p style="font-size: 0.95rem; color: var(--color-gray-600); margin: 1rem 0; flex-grow: 1;">
+                            Cách điều phối nhóm nhỏ, phân chia task trên Trello và kiểm soát tiến độ dự án thông qua quy trình Git Flow chuyên nghiệp.
+                        </p>
+                        <a href="pages/blog.html?slug=lam-viec-nhom-voi-agile-scrum" style="color: var(--color-green-primary); font-weight: 600; text-decoration: none; font-size: 0.9rem;">Khám phá quy trình →</a>
                     </article>
                 </div>
             </div>
         </section>
     </main>
 
-  <footer>
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>HXQ.dev</h3>
