@@ -45,8 +45,8 @@
     },
     {
     "id": 2,
-    "title": "Only static members can be accessed in initializers",
-    "slug": "only-static-members-can-be-accessed-in-initializers",
+    "title": "Flutter: Hiểu bản chất và 3 cách xử lý lỗi \"Only static members can be accessed in initializers\"",
+    "slug": "flutter-fix-only-static-members-accessed-in-initializers",
     "excerpt": "Hướng dẫn chi tiết cách khắc phục lỗi compile-time phổ biến trong Flutter khi khởi tạo biến const, cùng với 3 giải pháp thực tế và so sánh hiệu suất...",
     "category": "Technical",
     "date": "2025-12-18",
@@ -276,49 +276,41 @@
     },
     {
     "id": 7,
-    "title": "Chuyển Design từ Figma sang React",
-    "slug": "chuyen-design-tu-figma-sang-react",
-    "excerpt": "Kinh nghiệm làm việc với designer, extract design tokens, build component library và những lần 'ủa sao không giống Figma?' đáng nhớ...",
+    "title": "Xây dựng 'Base Project' cho riêng mình: Cách mình bắt đầu mọi dự án Flutter trong 5 phút",
+    "slug": "xay-dung-base-project-flutter-ca-nhan",
+    "excerpt": "Mệt mỏi vì phải setup lại từ đầu cho mỗi dự án? Mình đã tự xây dựng một bộ 'Starter-Kit' chuẩn với đầy đủ Core logic, Theme, và API handler...",
     "category": "Technical",
     "date": "2025-12-05",
-    "readTime": "9 min read",
-    "views": 2789,
-    "image": "🎨",
+    "readTime": "10 min read",
+    "views": 3560,
+    "image": "🛠️",
     "content": {
-        "intro": "Designer: \"Mình đã design xong đó, em code theo Figma nhé!\"\n\nMình mở Figma lên, thấy 50 screens với 1000 components và... hoang mang 😰\n\n\"Bắt đầu từ đâu đây?\"\n\nBài này kể về:\n- Lần đầu mình làm việc với designer (chaotic!)\n- Process từ Figma → React mình rút ra được\n- Tips để code sát design (và giảm thiểu \"sao không giống Figma?\" 😅)\n\n**Context:** Project web app cho 1 startup, team 1 designer + 2 devs (mình + 1 bạn).",
+        "intro": "Bạn đã bao giờ tốn cả một ngày chỉ để copy-paste các class cũ, setup thư mục, và cấu hình các package quen thuộc cho một dự án mới chưa? 😩\n\nLà một sinh viên năm 4 thường xuyên phải làm các bài tập lớn và dự án cá nhân, mình đã tự tạo ra một **Flutter Starter-Kit** – nơi chứa đựng mọi tinh hoa và kinh nghiệm mình đúc kết được. Giờ đây, mình chỉ mất 5 phút để có một bộ khung hoàn hảo.",
         "sections": [
-        {
-            "title": "🤝 Lần đầu làm việc với designer",
-            "content": "### Expectation vs Reality\n\n**Expectation:**\nDesigner gửi Figma → Mình code → Match 100% → Everyone happy!\n\n**Reality:**\nDesigner gửi Figma → Mình code → \"Ủa sao màu khác?\" → \"Spacing không đúng!\" → \"Font này không phải font kia!\" → Stress!\n\n### Communication issues\n\n**Week 1:**\n\nMình code Button component:\n- Background: `#2196F3` (nhìn Figma)\n- Border radius: `4px` (đo bằng mắt)\n- Padding: `10px 20px` (feel-based 😅)\n\nDesigner review: \"Button không đúng!\"\n\nMình: \"Sao không đúng? Em code theo Figma mà!\"\n\nDesigner: \"Màu này là Primary-500, không phải #2196F3. Border radius phải 8px, không phải 4px!\"\n\nMình check lại Figma, ở chỗ khác, border radius lại là 8px! Multiple versions!\n\n**Lesson 1:** Không assume! Phải hỏi rõ specs!\n\n### Thiếu design system\n\nMỗi screen designer design riêng lẻ. Không có:\n- Color palette defined\n- Typography system\n- Spacing scale\n- Component library\n\nKết quả:\n- Button màu đỏ ở screen này: `#FF5722`\n- Button màu đỏ ở screen kia: `#F44336`\n- \"Đây cũng màu đỏ mà?\" - Yes, nhưng khác shade! 😅\n\nMình code mỗi screen khác nhau. Inconsistent!"
-        },
-        {
-            "title": "💡 Cải thiện: Design tokens",
-            "content": "### Meeting với designer\n\nMình suggest: \"Anh ơi, mình cần define colors và spacing trước, rồi mới code. Nếu không sẽ inconsistent!\"\n\nDesigner: \"Ừ đúng, anh chưa làm design system. OK, mình làm tuần này!\"\n\nTuần sau, designer gửi 1 Figma page tên \"Design System\":\n\n### Colors\n\n**Brand colors:**\n```\nPrimary-500: #2196F3\nPrimary-400: #42A5F5\nPrimary-600: #1976D2\n...\n\nSecondary-500: #FF5722\n...\n\nGray-50: #FAFAFA\nGray-100: #F5F5F5\n...\nGray-900: #212121\n```\n\n**Semantic colors:**\n```\nSuccess: #4CAF50\nWarning: #FFC107\nError: #F44336\nInfo: #2196F3\n```\n\n### Typography\n\n```\nFont family: Inter\n\nHeading 1: 32px, Bold, 40px line-height\nHeading 2: 24px, Bold, 32px line-height\nHeading 3: 20px, SemiBold, 28px line-height\n\nBody Large: 16px, Regular, 24px line-height\nBody: 14px, Regular, 20px line-height\nBody Small: 12px, Regular, 16px line-height\n\nButton: 14px, Medium, 20px line-height\n```\n\n### Spacing\n\n```\n4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px\n```\n\nBase 4px! Mọi spacing phải là multiple của 4.\n\n### Border radius\n\n```\nSmall: 4px\nMedium: 8px\nLarge: 12px\nFull: 9999px (pill shape)\n```\n\n### Extract sang code\n\nMình tạo `tokens.js`:\n\n```javascript\nexport const colors = {\n  primary: {\n    50: '#E3F2FD',\n    100: '#BBDEFB',\n    // ...\n    500: '#2196F3',\n    // ...\n    900: '#0D47A1',\n  },\n  gray: {\n    50: '#FAFAFA',\n    // ...\n  },\n  semantic: {\n    success: '#4CAF50',\n    warning: '#FFC107',\n    error: '#F44336',\n    info: '#2196F3',\n  }\n};\n\nexport const typography = {\n  h1: {\n    fontSize: '32px',\n    fontWeight: '700',\n    lineHeight: '40px',\n  },\n  // ...\n};\n\nexport const spacing = {\n  xs: '4px',\n  sm: '8px',\n  md: '16px',\n  lg: '24px',\n  xl: '32px',\n  xxl: '48px',\n};\n\nexport const borderRadius = {\n  sm: '4px',\n  md: '8px',\n  lg: '12px',\n  full: '9999px',\n};\n```\n\nBây giờ code consistent! No more magic numbers!"
-        },
-        {
-            "title": "🧩 Component-based approach",
-            "content": "### Phân tích Figma design\n\nThay vì nhìn từng screen, mình nhìn toàn bộ design, identify components:\n\n**Atomic components:**\n- Button (primary, secondary, outline, text)\n- Input (text, password, email, textarea)\n- Checkbox, Radio\n- Badge, Tag\n- Avatar\n- Icon\n\n**Composite components:**\n- Card\n- Modal\n- Dropdown\n- Navbar\n- Sidebar\n- Table\n\n**Page-specific components:**\n- LoginForm\n- UserProfile\n- Dashboard widgets\n\n### Build từ nhỏ đến lớn\n\n**Week 1:** Atomic components\n\nCode Button với tất cả variants:\n\n```jsx\n// Button.jsx\nimport { colors, spacing, borderRadius } from './tokens';\n\nconst Button = ({ variant = 'primary', size = 'md', children, ...props }) => {\n  const styles = {\n    primary: {\n      backgroundColor: colors.primary[500],\n      color: '#fff',\n    },\n    secondary: {\n      backgroundColor: colors.secondary[500],\n      color: '#fff',\n    },\n    outline: {\n      backgroundColor: 'transparent',\n      border: `1px solid ${colors.primary[500]}`,\n      color: colors.primary[500],\n    },\n  };\n  \n  const sizes = {\n    sm: { padding: `${spacing.xs} ${spacing.sm}`, fontSize: '12px' },\n    md: { padding: `${spacing.sm} ${spacing.md}`, fontSize: '14px' },\n    lg: { padding: `${spacing.md} ${spacing.lg}`, fontSize: '16px' },\n  };\n  \n  return (\n    <button\n      style={{\n        ...styles[variant],\n        ...sizes[size],\n        borderRadius: borderRadius.md,\n        border: 'none',\n        cursor: 'pointer',\n        fontWeight: '500',\n      }}\n      {...props}\n    >\n      {children}\n    </button>\n  );\n};\n```\n\n**Week 2:** Composite components\n\nDùng atomic components để build Card, Modal, etc.\n\n**Week 3-4:** Page-specific components\n\nCompose everything lại!\n\n### Storybook\n\nDesigner muốn xem components trước khi integrate vào app.\n\nMình setup Storybook:\n\n```jsx\n// Button.stories.jsx\nexport default {\n  title: 'Components/Button',\n  component: Button,\n};\n\nexport const Primary = () => <Button variant=\"primary\">Primary</Button>;\nexport const Secondary = () => <Button variant=\"secondary\">Secondary</Button>;\nexport const Outline = () => <Button variant=\"outline\">Outline</Button>;\n```\n\nDesigner có thể:\n- Xem tất cả components\n- Test interactions\n- Verify với Figma\n\nNo need to run full app!"
-        },
-        {
-            "title": "😅 Những lần 'không giống Figma'",
-            "content": "### Case 1: Spacing không chính xác\n\n**Designer:** \"Spacing giữa header và content phải 24px!\"\n\n**Mình check code:** `margin-top: 20px`\n\n**Mistake:** Mình eyeball, không measure chính xác!\n\n**Fix:** Dùng Figma Dev Mode (hoặc inspect), copy exact values.\n\n**Lesson:** Đừng guess! Measure!\n\n### Case 2: Font render khác\n\n**Designer:** \"Font weight không đúng!\"\n\nMình set `font-weight: 500` (medium), nhưng trên browser look like 400 (regular).\n\n**Nguyên nhân:** Font Inter trên Google Fonts không có weight 500, fallback về 400!\n\n**Fix:** Import đúng font weights:\n\n```html\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap\" rel=\"stylesheet\">\n```\n\nChange code sang 600 (semibold). Match!\n\n### Case 3: Colors on different screens\n\nButton màu đỏ nhìn khác nhau trên laptop mình vs màn hình designer.\n\n**Nguyên nhân:** Color profiles! Designer dùng màn hình calibrated, mình dùng màn hình laptop thường.\n\n**Solution:** Không có perfect solution. Compromise. Dùng hex values chính xác, accept màn hình khác nhau sẽ render khác.\n\n### Case 4: Responsive\n\nFigma design chỉ có desktop (1440px) và mobile (375px).\n\nMình code responsive cho tablet (768px, 1024px) nhưng không có design!\n\nMình tự decide: Shrink spacing, adjust columns.\n\nDesigner review: \"Tablet không được đẹp!\"\n\n**Fix:** Request thêm tablet designs. Designer làm thêm 2 screens.\n\n**Lesson:** Clarify tất cả breakpoints trước!"
-        },
-        {
-            "title": "🎯 Process mình rút ra",
-            "content": "### Before coding\n\n**1. Kickoff meeting với designer:**\n- Walkthrough design\n- Clarify unclear parts\n- Discuss edge cases\n- Define breakpoints\n\n**2. Design system first:**\n- Extract tokens\n- Define component inventory\n- Agree on naming conventions\n\n**3. Setup tools:**\n- Figma Dev Mode (or plugins)\n- Storybook for component library\n- Design QA checklist\n\n### During coding\n\n**1. Build components incrementally:**\n- Atoms → Molecules → Organisms (Atomic Design)\n- Get feedback sớm, don't wait until finish!\n\n**2. Use Figma inspect:**\n- Copy exact values (don't eyeball!)\n- Export assets properly (SVG > PNG for icons)\n\n**3. Regular design reviews:**\n- Mỗi tuần show progress\n- Catch issues sớm\n\n**4. Document deviations:**\nNếu phải deviate from design (technical constraints), document why.\n\nVí dụ: \"Cái animation này không feasible với performance budget, suggest dùng simpler animation.\"\n\n### After coding\n\n**1. Design QA:**\nDesigner review trên staging environment (not localhost!).\n\n**2. Iterate:**\nFix feedback, re-review.\n\n**3. Documentation:**\nUpdate Storybook, write component usage docs."
-        },
-        {
-            "title": "💡 Tips thực tế",
-            "content": "### For developers\n\n**1. Learn basic design principles:**\nHiểu typography, color theory, spacing → better communication với designer.\n\n**2. Ask for Figma access:**\nĐừng chỉ nhận screenshots! Access Figma để inspect.\n\n**3. Use design linting:**\n```bash\nnpm install @figma/eslint-plugin-figma-design-tokens\n```\n\nLint code để ensure dùng đúng tokens.\n\n**4. Pixel-perfect không phải goal:**\n\"Pixel-perfect\" là myth! Browsers render khác nhau. Aim for \"close enough\", prioritize UX.\n\n**5. Component-driven development:**\nBuild components in isolation (Storybook) trước khi integrate.\n\n### For designers (if they read this 😊)\n\n**1. Provide design system:**\nColors, typography, spacing defined rõ ràng!\n\n**2. Use consistent naming:**\nNếu button tên \"Primary\" trong Figma, developer sẽ code `<Button variant=\"primary\">`.\n\n**3. Consider technical constraints:**\nAnimation đẹp nhưng heavy? Discuss với developer!\n\n**4. Design for all states:**\n- Default\n- Hover\n- Active\n- Disabled\n- Loading\n- Error\n\n**5. Responsive designs:**\nDesign cho ít nhất 3 breakpoints: mobile, tablet, desktop.\n\n### Tools giúp collaboration\n\n**1. Figma plugins:**\n- \"Figma to Code\" - generate code from design\n- \"Stark\" - check accessibility\n- \"Content Reel\" - mock realistic content\n\n**2. Zeplin / Figma Dev Mode:**\nHandoff tool, developer xem specs dễ hơn.\n\n**3. Abstract / Figma versioning:**\nTrack design changes, như Git cho designers!\n\n**4. Slack/Discord:**\nQuick communication, đừng chờ meeting!"
-        },
-        {
-            "title": "💭 Lessons learned",
-            "content": "### 1. Designer và developer là partners\n\nKhông phải \"designer ra lệnh, developer làm\". Mình là team!\n\nNếu design không feasible, nói thẳng. Discuss alternatives.\n\n### 2. Design system saves time\n\nTrước có design system: 2 tuần code 10 screens.\n\nSau có design system: 1 tuần code 10 screens.\n\nInvest time upfront pays off!\n\n### 3. Components > Pages\n\nThink in components, not pages. Reusability!\n\n### 4. Communication is key\n\nMọi issues mình gặp đều từ miscommunication.\n\nOver-communicate > Under-communicate!\n\n### 5. Iterations are normal\n\nKhông ai làm perfect ngay lần đầu. Expect revisions!\n\nDesigner cũng iterate designs. Developer cũng iterate code.\n\nLà normal!"
-        }
+            {
+                "title": "📦 1. Cấu trúc thư mục 'Standard'",
+                "content": "Mình không còn phải phân vân 'file này để đâu'. Starter-kit của mình chia sẵn các folder:\n- `core/`: Chứa các thành phần dùng chung (Utils, Constants, Errors).\n- `data/`: Nơi xử lý Models và Data Sources.\n- `presentation/`: Quản lý Widgets và Controllers/Blocs.\n- `l10n/`: Cấu hình đa ngôn ngữ sẵn có.\n\nViệc thống nhất cấu trúc giúp mình 'nhảy' vào bất cứ dự án cũ nào cũng thấy quen thuộc ngay lập tức."
+            },
+            {
+                "title": "🎨 2. Hệ thống Theme & Style động",
+                "content": "Mình tích hợp sẵn một `ThemeManager` cho phép chuyển đổi Light/Dark Mode trong 1 nốt nhạc. \n\n\n\nMình cũng định nghĩa sẵn các extension cho `BuildContext` để gọi màu sắc hay font chữ cực ngắn gọn: `context.color.primary` thay vì dòng code dài dằng dặc truyền thống."
+            },
+            {
+                "title": "🌐 3. API Handler 'Bất tử'",
+                "content": "Đây là phần mình tự hào nhất. Mình setup sẵn **Dio** kết hợp với **Interceptors**. \n\nNó tự động:\n- Refresh Token khi hết hạn.\n- Log mọi request/response ra console một cách gọn gàng.\n- Bắt mọi loại lỗi mạng và chuyển đổi thành thông báo tiếng Việt thân thiện.\n\n"
+            },
+            {
+                "title": "🧩 4. Bộ UI Components 'Nhà làm'",
+                "content": "Trong Starter-kit, mình để sẵn các 'Base Widget' như:\n- `BaseButton`: Tự động đổi trạng thái Loading.\n- `BaseScreen`: Xử lý sẵn lỗi bàn phím che nội dung.\n- `AppDialogs`: Bộ thông báo đồng nhất cho toàn app.\n\nThay vì code lại từ đầu, mình chỉ việc gọi các component này ra và tùy chỉnh nhẹ."
+            },
+            {
+                "title": "🚀 5. Những kịch bản (Scripts) tự động",
+                "content": "Để thực sự chuyên nghiệp, mình dùng `Makefile` để chạy các lệnh dài. Thay vì gõ `flutter pub run build_runner build --delete-conflicting-outputs`, mình chỉ cần gõ `make build`. Cực kỳ tiết kiệm thời gian!"
+            }
         ],
-        "conclusion": "Làm việc với designer lần đầu chaotic! Nhiều miscommunications, nhiều lần revise.\n\nNhưng sau project đó, mình học được:\n- Process từ Figma → React\n- Importance của design system\n- How to communicate với designers\n- Tools và techniques để code sát design hơn\n\nGiờ mình confident hơn nhiều. Collaboration với designer smooth hơn.\n\n**Key takeaway:** Designer + Developer = Better product!\n\nNếu bạn đang struggle với Figma → React, hy vọng bài này giúp được bạn!\n\nGood luck! 🎨🚀",
-        "tags": ["Figma", "React", "Design System", "Frontend", "Collaboration"],
-        "relatedPosts": [2, 8]
+        "conclusion": "Xây dựng Starter-kit cá nhân không chỉ là tiết kiệm thời gian, mà là cách mình tự đặt ra tiêu chuẩn cho chính mình. Nó là minh chứng cho việc mình nghiêm túc với nghề nghiệp và luôn tìm cách tối ưu hóa công việc.\n\n**Lời khuyên:** Đừng chờ đến lúc đi làm mới xây dựng quy trình. Hãy làm nó ngay từ khi còn là sinh viên!",
+        "tags": ["Flutter", "Productivity", "Architecture", "Starter Kit", "Automation"],
+        "relatedPosts": [2, 4]
     }
     },
     {
