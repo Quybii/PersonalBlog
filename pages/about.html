@@ -361,6 +361,22 @@
         body.dark-mode .cta-section {
             background: var(--color-gray-900);
         }
+        .btn-outline:hover {
+    background: var(--color-green-primary);
+    color: var(--color-white) !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+@media (max-width: 480px) {
+    .cv-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .cv-actions a {
+        width: 100%;
+        justify-content: center;
+    }
+}
     </style>
 </head>
 <body>
@@ -404,6 +420,22 @@
                 <p style="font-size: 1.15rem;">
                     Tôi không chỉ hướng tới việc code chạy được, mà còn tập trung vào <strong>kiến trúc mã nguồn sạch (Clean Architecture)</strong> và khả năng xử lý các vấn đề kỹ thuật phức tạp trong môi trường thực tế.
                 </p>
+                <div class="cv-actions">
+                <a href="../assets/docs/CV_Huynh_Xuan_Quy_Intern.pdf" target="_blank" class="btn btn-primary">
+                    <span>Xem CV trực tuyến</span>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                </a>
+                <a href="../assets/docs/CV_Huynh_Xuan_Quy_Intern.pdf" download class="btn btn-outline-cv">
+                    <div class="btn-content">
+                        <span>Tải xuống PDF</span>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                    </div>
+                </a>
+            </div>
             </div>
 
             <div class="about-avatar">
